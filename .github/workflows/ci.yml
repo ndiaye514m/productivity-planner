@@ -44,6 +44,6 @@ jobs:
       - name: Test
         run: npm run test:ci 
 
-      # Build
+      # Build2
       - name: Build
         run: npm run build
