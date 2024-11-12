@@ -40,9 +40,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      # Tests
+      # Tests ci
       - name: Test
-        run: npm run test:ci
+        run: npm run test:ci 
 
       # Build
       - name: Build
