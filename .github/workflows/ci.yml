@@ -36,14 +36,14 @@ jobs:
       - name: Audit Signature
         run: npm audit signatures
 
-      # Linter
+      # Linter2
       - name: Lint
         run: npm run lint
 
-      # Tests
+      # Tests ci13Nov sans erreurs
       - name: Test
-        run: npm run test:ci
+        run: npm run test:ci 
 
-      # Build
+      # Build2
       - name: Build
         run: npm run build
