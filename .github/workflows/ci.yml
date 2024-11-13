@@ -40,7 +40,7 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      # Tests ci13Nov
+      # Tests ci13Nov sans erreurs
       - name: Test
         run: npm run test:ci 
 
