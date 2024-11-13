@@ -40,7 +40,7 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      # Tests ci2
+      # Tests ci13Nov
       - name: Test
         run: npm run test:ci 
 
