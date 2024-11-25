@@ -24,12 +24,7 @@
       "dom"
     ],
     //my baseURl
-    "baseUrl": "./",
-    "paths":{
-
-   "@mes_env/*": ["src/environments/*"],
-
-  }
+    "baseUrl": "../src",
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
