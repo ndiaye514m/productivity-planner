@@ -22,9 +22,9 @@
     "lib": [
       "ES2022",
       "dom"
-    ],
+    ]
     //my baseURl
-    "baseUrl": "../../src",
+  //  "baseUrl": "../../src",
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
