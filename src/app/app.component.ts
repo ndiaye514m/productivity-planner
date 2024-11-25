@@ -13,7 +13,7 @@ export class AppComponent {
   title = 'productivity-planner';
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly isStaging=!(environment as any).production;
-  
+  //eadonly isStaging=environment.production;
   isProductionEnvironment=environment.production;
   firebaseProjectId=environment.firebaseConfig.projectId;
 
