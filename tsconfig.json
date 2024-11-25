@@ -22,7 +22,14 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    //my baseURl
+    "baseUrl": "./",
+    "paths":{
+
+   "@mes_env/*": ["src/environments/*"],
+
+  }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
