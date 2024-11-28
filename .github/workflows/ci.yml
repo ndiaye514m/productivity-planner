@@ -46,4 +46,4 @@ jobs:
 
       # Build2
       - name: Build
-        run: npm run build
+        run: node -r dotenv/config mynode.js && npm run build
