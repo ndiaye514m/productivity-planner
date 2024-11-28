@@ -23,8 +23,6 @@
       "ES2022",
       "dom"
     ]
-    //my baseURl
-  //  "baseUrl": "../../src",
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
