@@ -40,13 +40,15 @@ jobs:
       - name: Lint
         run: npm run lint
 
+       # Pre Build
+      - name: Pre Build
+        run: node -r dotenv/config mynode.js
+
       # Tests ci13Nov sans erreurs
       - name: Test
         run: npm run test:ci 
 
-      # Pre Build
-      - name: Pre Build
-        run: node -r dotenv/config mynode.js
+     
         
       # Build2
       - name: Build
