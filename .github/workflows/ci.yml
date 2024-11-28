@@ -43,6 +43,9 @@ jobs:
       # Tests ci13Nov sans erreurs
       - name: Test
         run: npm run test:ci 
+# pre Build2
+      - name: pre build
+        run: node -r dotenv/config mynode.js
 
       # Build2
       - name: Build
