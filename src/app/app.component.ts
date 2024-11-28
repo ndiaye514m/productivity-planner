@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { environment } from '../../environment.development';
 //import { environment } from '../environments/environment';
 
 @Component({
@@ -14,7 +15,7 @@ export class AppComponent {
   /*// eslint-disable-next-line @typescript-eslint/no-explicit-any
   //readonly isStaging=!(environment as any).production;
   //eadonly isStaging=environment.production;
-  isProductionEnvironment=environment.production;
-  firebaseProjectId=environment.firebaseConfig.projectId;*/
+  isProductionEnvironment=environment.production;*/
+  firebaseProjectId=environment.projectId;
 
 }

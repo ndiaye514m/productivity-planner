@@ -46,6 +46,7 @@ Thumbs.db
 # Environment
 /src/environments
 /src/.env
+/src/environment.development.ts
 #firebase cache
 #.firebase/*
 /.firebase
