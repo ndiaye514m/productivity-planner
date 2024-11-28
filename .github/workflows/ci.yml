@@ -44,6 +44,10 @@ jobs:
       - name: Test
         run: npm run test:ci 
 
+      # Pre Build
+      - name: Pre Build
+        run: node -r dotenv/config mynode.js
+        
       # Build2
       - name: Build
         run: npm run build
