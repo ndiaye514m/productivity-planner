@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node -r dotenv/config mynode.js && ng serve ",
     "build": "ng build",
     "build:production": "ng build --configuration=production",
     "build:staging": "ng build --configuration=staging",
@@ -12,9 +12,9 @@
     "test": "ng test",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
-    "deploy:development":"npm run build:development && firebase use development && firebase deploy",
-    "deploy:staging":"npm run build:staging && firebase use staging && firebase deploy",
-    "deploy:production":"npm run build:production && firebase use production  && firebase deploy"
+    "deploy:development": "npm run build:development && firebase use development && firebase deploy",
+    "deploy:staging": "npm run build:staging && firebase use staging && firebase deploy",
+    "deploy:production": "npm run build:production && firebase use production  && firebase deploy"
   },
   "private": true,
   "dependencies": {
@@ -26,6 +26,7 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
+    "dotenv": "^16.4.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
