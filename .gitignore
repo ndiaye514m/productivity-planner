@@ -43,7 +43,7 @@ Thumbs.db
 
 
 
-# Environment
+# Environment obligatoirement ignored
 /src/environments
 #firebase cache
 #.firebase/*
