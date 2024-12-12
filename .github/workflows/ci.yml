@@ -46,7 +46,7 @@ jobs:
         run: /
           mkdir environments
           echo "Creating production environment file ..."
-          echo "${{ secrets.FIREBASE_CONFIG }}" >> environments/environment.ts
+          echo "${{ secrets.FIREBASE_CONFIG }}" | base64 -d  >> environments/environment.ts
          # echo -n "${{ secrets.FIREBASE_CONFIG }}" > environments/environment.ts 
            
       # Tests ci13Nov sans erreurs
