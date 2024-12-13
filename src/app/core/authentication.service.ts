@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.dev';
-//import { environment } from '../../environments/environment';
+//import { environment } from '../../environments/environment.dev';
+import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 
 /* Represents the payload of the response when registering a new user in firebase
