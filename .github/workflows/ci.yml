@@ -47,12 +47,12 @@ jobs:
           mkdir environments
           echo "Creating environment file ..."
           echo "${{ secrets.FIREBASE_CONFIG }}"  >> environments/environment.ts
-          echo "Creating production environment file ..."
-          echo "${{ secrets.FIREBASE_CONFIG_PROD }}"  >> environments/environment.prod.ts
-          echo "Creating staging environment file ..."
-          echo "${{ secrets.FIREBASE_CONFIG_STAG }}"  >> environments/environment.stag.ts
-          echo "Creating development environment file ..."
-          echo "${{ secrets.FIREBASE_CONFIG_DEV }}"  >> environments/environment.dev.ts
+         # echo "Creating production environment file ..."
+          #echo "${{ secrets.FIREBASE_CONFIG_PROD }}"  >> environments/environment.prod.ts
+         # echo "Creating staging environment file ..."
+          #echo "${{ secrets.FIREBASE_CONFIG_STAG }}"  >> environments/environment.stag.ts
+          #echo "Creating development environment file ..."
+          #echo "${{ secrets.FIREBASE_CONFIG_DEV }}"  >> environments/environment.dev.ts
       # Tests ci13Nov sans erreurs
       - name: Test
         run: npm run test:ci 
