@@ -9,7 +9,7 @@
     "build:staging": "ng build --configuration=staging",
     "build:development": "ng build --configuration=development",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "jest",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "deploy:development": "npm run build:development && firebase use development && firebase deploy",
@@ -39,6 +39,7 @@
     "eslint": "^9.13.0",
     "jest": "^29.7.0",
     "jest-preset-angular": "^14.4.2",
+    "ts-node": "^10.9.2",
     "typescript": "~5.5.2",
     "typescript-eslint": "8.10.0"
   }
