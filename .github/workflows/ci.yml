@@ -55,7 +55,7 @@ jobs:
           #echo "${{ secrets.FIREBASE_CONFIG_DEV }}"  >> environments/environment.dev.ts
       # Tests ci13Nov sans erreurs
       - name: Test
-        run: npm run test:ci 
+        run: npm run test
 
       # Build2
       - name: Build
