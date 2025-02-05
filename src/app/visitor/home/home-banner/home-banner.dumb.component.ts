@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-home-banner',
@@ -9,7 +9,10 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeBannerDumbComponent {
-  title=input.required<string>();
-  description=input.required<string>();
-  buttonLabel=input.required<string>();
+  readonly title=input.required<string>();
+  readonly description=input.required<string>();
+  readonly buttonLabel=input.required<string>();
+
+  readonly clicked=output<void>();
 }
+  
