@@ -12,6 +12,6 @@ export const routes: Routes = [
     {
         path:'signup',
         component: SignupPageComponent, 
-        title:'Démarrez maintenant aprés inscription',
+        title:'Signup',
     },
 ];
