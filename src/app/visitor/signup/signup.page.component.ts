@@ -8,9 +8,7 @@ import { FormGroup, FormsModule } from '@angular/forms';
   styleUrl: './signup.page.component.scss'
 })
 export class SignupPageComponent {
-onSubmit() {
-throw new Error('Method not implemented.');
-}
+
   productFormGroup!:FormGroup;
   submitted?:boolean=false;
   readonly name = signal('');
@@ -33,4 +31,10 @@ throw new Error('Method not implemented.');
   
     });*/
     }
+
+     onSubmit() {
+    console.log('Form submitted');
+  }
+
+    
 }

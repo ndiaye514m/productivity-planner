@@ -1,50 +1,20 @@
 
 <div class="container" >
-    <div class="row mt-3" style="height:110px">
+    <div class="row mt-2" style="height:35px">
          <div style="color:green">
-            
-                 <h1 class="text-center">INSCRIPTION</h1>
-                         
-         </div>
+            <h1 class="text-center">INSCRIPTION</h1>
+        </div>
     </div>
 </div>
 
-<div class="container ">
+<div class="container mt-0">
     
    
     <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
       <fieldset class="border p-2">
         <legend  class="float-none w-auto p-2">Nouveau Membre</legend>  
         <div class="row justify-content-center">
-       <!-- <div class="row mb-5">
-            <label for="name" class="col-sm-3 col-form-label text-center ms-5">Nom : </label>
-           
-             <div class="col-sm-4 position-relative">
-              
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-                <input
-                  #nameField="ngModel" 
-                  [(ngModel)]="name"
-                  type="text" 
-                  name="name" 
-                  class="form-control" 
-                  id="name"
-                 minlength="3"
-                maxlength="20"
-                 pattern="[a-zA-Z]+"
-                
-                required />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-               
-                    
-                 @if(nameField.dirty && nameField.hasError('required')) {-->
-                  <!--<div class="form-text text-danger">Name is required.</div>-->
-                <!--  <div class="moninvalid-tooltip"> Le Nom du nouveau membre est obligatoire</div>
-                  }
-               
-                                           
-            </div>
-             
-        </div>-->
+      
         <div class="mb-3">
             <div class="col-sm-4  mx-auto">
             <label for="name" class="col-form-label fw-bold">Nom</label>
@@ -61,8 +31,8 @@
                   id="name"
                  minlength="3"
                 maxlength="20"
-                 pattern="[a-zA-Z]+"
-                
+                 pattern="[a-zA-Z ]+"
+                 [class.is-invalid]="nameField.dirty && nameField.invalid"
                 required />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
                
                     
@@ -71,11 +41,26 @@
                   <div class="moninvalid-tooltip"> Le Nom du nouveau membre est obligatoire</div>
                  
                   }
+                  @if(nameField.dirty && nameField.hasError('pattern')) {
+                    <!--<div class="form-text text-danger">Name is required.</div>-->
+                    <div class="moninvalid-tooltip"> Le Nom doit contenir que des lettres</div>
+                   
+                    }
+                    @if(nameField.dirty && nameField.hasError('minlength')) {
+                        <!--<div class="form-text text-danger">Name is required.</div>-->
+                        <div class="moninvalid-tooltip"> Le Nom doit contenir au moins 3 caractères</div>
+                       
+                        }
+                 @if(nameField.dirty && nameField.hasError('maxlength')) {
+                            <!--<div class="form-text text-danger">Name is required.</div>-->
+                            <div class="moninvalid-tooltip"> Le Nom doit contenir au plus 20 caractères</div>
+                           
+                            }
                
                                            
             </div>
             <div class="col-sm-4  mx-auto">
-                <label for="email" class="col-form-label fw-bold">E-mail</label>
+                <label for="email" class=" form-label col-form-label fw-bold">E-mail</label>
                 </div>
                  <div class="col-sm-4 position-relative mx-auto mb-4"><!--position relative pour tooltip-->
                   
@@ -87,16 +72,27 @@
                     class="form-control" 
                     id="email"
                     autocomplete="email"
+                   
+                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                    [class.is-invalid]="emailField.dirty && emailField.invalid"
                     required
                    />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
                  
                       
                    @if(emailField.dirty && emailField.hasError('required')) {
                    <!-- <div class="form-text text-danger">Email is required.</div>-->
-                    <div class="moninvalid-tooltip"> L'Email est obligatoire</div>
+                    <div class="moninvalid-tooltip">L'E-mail est obligatoire</div>
                     }
-                   
-                                               
+                    @else if(emailField.dirty && emailField.hasError('email')) {
+                        <!-- <div class="form-text text-danger">Email is required.</div>-->
+                         <div class="moninvalid-tooltip">Veuillez entrer une adresse email valide</div>
+                         }
+                         @else if(emailField.dirty && emailField.hasError('pattern')) {
+                            <!-- <div class="form-text text-danger">Email is required.</div>-->
+                             <div class="moninvalid-tooltip">Votre devez saisir une bonne adresse mail</div>
+                             }
+                       
+                         
                 </div>
 
                 <div class="col-sm-4  mx-auto">
@@ -111,6 +107,7 @@
                             name="password" 
                             class="form-control" 
                             id="password"
+                            [class.is-invalid]="passwordField.dirty && passwordField.invalid"
                             required
                         /> 
                         
@@ -122,7 +119,7 @@
                 </div>
 
                 <div class="col-sm-4  mx-auto">
-                    <label for="password" class="col-form-label fw-bold">Confirmez votre mot de passe</label>
+                    <label for="password" class=" form-label col-form-label fw-bold">Confirmez votre mot de passe</label>
                 </div>
                 <div class="col-sm-4 position-relative mx-auto mb-4"><!--position relative pour tooltip-->
                       
@@ -134,6 +131,8 @@
                         class="form-control" 
                         id="confirmPassword"
                         autocomplete="new-password"
+                        [class.is-invalid]="confirmPasswordField.dirty && confirmPasswordField.invalid"
+                        [class.is-valid]="confirmPasswordField.dirty && confirmPasswordField.valid"
                         required
                     /> 
                     
@@ -154,17 +153,14 @@
                     <div class="col-auto">
                         <button type="reset" class="btn btn-secondary ms-2">Annuler</button>
                     </div>
-                </div>-->
-                <div class="col-sm-4  mx-auto">
-                <div class="row mt-5 offset-sm-2">
-                    <div class="col-auto">
+                </div>btn-lg btn-block-->
+                <div class="col-sm-3  mx-auto">
+                <div class="wrapper mt-5 offset-sm-2 mx-auto">
+                    
                         <button  type="submit"
-                        class="btn btn-primary"
+                        class="btn btn-primary col-sm-3 w-100"
                         [disabled]="signupForm.invalid">S'inscrire</button>
-                    </div>
-                    <div class="col-auto">
-                        <button type="reset" class="btn btn-secondary ms-2">Annuler</button>
-                    </div>
+                  
                 </div>
             </div>
              
