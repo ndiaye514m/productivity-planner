@@ -9,17 +9,17 @@
     </div>
 </div>
 
-<div class="container">
- 
+<div class="container ">
+    
    
     <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
       <fieldset class="border p-2">
         <legend  class="float-none w-auto p-2">Nouveau Membre</legend>  
-        
-        <div class="row mb-5">
-            <label for="inputNom" class="col-sm-1 col-form-label text-center ms-5">Nom : </label>
+        <div class="row justify-content-center">
+       <!-- <div class="row mb-5">
+            <label for="name" class="col-sm-3 col-form-label text-center ms-5">Nom : </label>
            
-             <div class="col-sm-4 position-relative"><!--position relative pour tooltip-->
+             <div class="col-sm-4 position-relative">
               
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
                 <input
@@ -29,137 +29,161 @@
                   name="name" 
                   class="form-control" 
                   id="name"
-                  required
-                 maxlength="50" />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                 minlength="3"
+                maxlength="20"
+                 pattern="[a-zA-Z]+"
+                
+                required />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
                
                     
-                 @if(nameField.dirty && nameField.hasError('required')) {
-                  <div class="form-text text-danger">Name is required.</div>
-                  <div class="invalid-tooltip"> Le Nom du nouveau membre est obligatoire</div>
+                 @if(nameField.dirty && nameField.hasError('required')) {-->
+                  <!--<div class="form-text text-danger">Name is required.</div>-->
+                <!--  <div class="moninvalid-tooltip"> Le Nom du nouveau membre est obligatoire</div>
                   }
                
                                            
             </div>
-              <div class="col-auto">
-           
-                     <span id="nomHelpInline" class="form-text">
-                          Renseignez ici le nom du produit
-                        </span>
-                        
-                                            
+             
+        </div>-->
+        <div class="mb-3">
+            <div class="col-sm-4  mx-auto">
+            <label for="name" class="col-form-label fw-bold">Nom</label>
             </div>
+             <div class="col-sm-4 position-relative mx-auto mb-4"><!--position relative pour tooltip-->
+              
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+                <input
+                  #nameField="ngModel" 
+                  [(ngModel)]="name"
+                  type="text" 
+                  name="name" 
+                  class="form-control" 
+                  id="name"
+                 minlength="3"
+                maxlength="20"
+                 pattern="[a-zA-Z]+"
+                
+                required />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+               
+                    
+                 @if(nameField.dirty && nameField.hasError('required')) {
+                  <!--<div class="form-text text-danger">Name is required.</div>-->
+                  <div class="moninvalid-tooltip"> Le Nom du nouveau membre est obligatoire</div>
+                 
+                  }
+               
+                                           
+            </div>
+            <div class="col-sm-4  mx-auto">
+                <label for="email" class="col-form-label fw-bold">E-mail</label>
+                </div>
+                 <div class="col-sm-4 position-relative mx-auto mb-4"><!--position relative pour tooltip-->
+                  
+                    <input
+                    #emailField="ngModel" 
+                    [(ngModel)]="email"
+                    type="email" 
+                    name="email" 
+                    class="form-control" 
+                    id="email"
+                    autocomplete="email"
+                    required
+                   />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                 
+                      
+                   @if(emailField.dirty && emailField.hasError('required')) {
+                   <!-- <div class="form-text text-danger">Email is required.</div>-->
+                    <div class="moninvalid-tooltip"> L'Email est obligatoire</div>
+                    }
+                   
+                                               
+                </div>
+
+                <div class="col-sm-4  mx-auto">
+                    <label for="password" class="col-form-label fw-bold">Mot de passe</label>
+                </div>
+                <div class="col-sm-4 position-relative mx-auto mb-4"><!--position relative pour tooltip-->
+                      
+                        <input
+                            #passwordField="ngModel" 
+                            [(ngModel)]="password"
+                            type="password" 
+                            name="password" 
+                            class="form-control" 
+                            id="password"
+                            required
+                        /> 
+                        
+                        @if(passwordField.dirty && passwordField.hasError('required')) {
+                            <div class="moninvalid-tooltip"> Le password est obligatoire</div>
+                            }
+                                
+                                                   
+                </div>
+
+                <div class="col-sm-4  mx-auto">
+                    <label for="password" class="col-form-label fw-bold">Confirmez votre mot de passe</label>
+                </div>
+                <div class="col-sm-4 position-relative mx-auto mb-4"><!--position relative pour tooltip-->
+                      
+                    <input
+                        #confirmPasswordField="ngModel" 
+                        [(ngModel)]="confirmPassword"
+                        type="password" 
+                        name="confirmPassword" 
+                        class="form-control" 
+                        id="confirmPassword"
+                        autocomplete="new-password"
+                        required
+                    /> 
+                    
+                    @if(confirmPasswordField.dirty && confirmPasswordField.hasError('required')) {
+                        
+                        <div class="moninvalid-tooltip"> La confirmation est obligatoire</div>
+                        }      
+                                
+                                                   
+                </div>
+
+               <!-- <div class="row mt-5 offset-sm-2">
+                    <div class="col-auto">
+                        <button  type="submit"
+                        class="btn btn-primary"
+                        [disabled]="signupForm.invalid">S'inscrire</button>
+                    </div>
+                    <div class="col-auto">
+                        <button type="reset" class="btn btn-secondary ms-2">Annuler</button>
+                    </div>
+                </div>-->
+                <div class="col-sm-4  mx-auto">
+                <div class="row mt-5 offset-sm-2">
+                    <div class="col-auto">
+                        <button  type="submit"
+                        class="btn btn-primary"
+                        [disabled]="signupForm.invalid">S'inscrire</button>
+                    </div>
+                    <div class="col-auto">
+                        <button type="reset" class="btn btn-secondary ms-2">Annuler</button>
+                    </div>
+                </div>
+            </div>
+             
         </div>
     
-         <div class="row mb-5">
-            <label for="inputPrice" class="col-sm-1 col-form-label text-center ms-5">E-mail : </label>
-            <div class="col-sm-4 position-relative"><!--position relative pour tooltip-->
-              <!--  <input type="number" class="form-control" formControlName="price" [ngClass]="{'is-valid':submitted && productPrice.valid,'is-invalid':submitted && productPrice.invalid}">-->
-              <input
-              #emailField="ngModel" 
-              [(ngModel)]="email"
-              type="email" 
-              name="email" 
-              class="form-control" 
-              id="email"
-              required
-             />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-           
-                
-             @if(emailField.dirty && emailField.hasError('required')) {
-              <div class="form-text text-danger">Email is required.</div>
-              <div class="invalid-tooltip"> L'Email est obligatoire</div>
-              }
-                 <!--   <div *ngIf="submitted && productPrice.errors.required" class="invalid-feedback invalid-tooltip">Champ obligatoire</div>
-             -->
-             <!--   <div *ngIf="submitted && productPrice.errors['required']" class="invalid-feedback invalid-tooltip">Champ obligatoire</div>
-             --> 
-            <!--
-                <div [ngClass]="{'valid-tooltip':submitted && productPrice.valid,'invalid-tooltip':submitted && productPrice.invalid}" >Champ Valide</div> 
-            -->
-            </div>
-             <div class="col-auto">
-                    <span id="priceHelpInline" class="form-text">
-                          Le Prix est estimé en Francs CFA
-                        </span>
-            </div>
-       
-        </div>
-
-        <div class="row mb-5">
-            <label for="inputQuantity" class="col-sm-1 col-form-label text-center ms-5">Mot de passe : </label>
-            <div class="col-sm-2 position-relative"><!--position relative pour tooltip-->
-                <!--<input type="number" class="form-control" id="inputQuantity" formControlName="quantity" [ngClass]="{'is-valid':submitted && productQuantity.valid,'is-invalid':submitted && productQuantity.invalid}">-->
-                <input
-                #passwordField="ngModel" 
-                [(ngModel)]="password"
-                type="password" 
-                name="password" 
-                class="form-control" 
-                id="password"
-                required
-               /> 
-            
-               @if(passwordField.dirty && passwordField.hasError('required')) {
-                <div class="form-text text-danger">Password is required.</div>
-                <div class="invalid-tooltip"> Le password est obligatoire</div>
-                }
-            </div>
-             <div class="col-auto">
-                    <span id="QuantityHelpInline" class="form-text">
-                          
-                        </span>
-            </div>
-       
-        </div>
-
-
-        <div class="row mb-4">
-            <label for="inputSelected" class="col-sm-1 col-form-label text-center ms-5">Confirmez votre mot de passe : </label>
-            <div class="col-sm-2 mt-1">
-                
-             <input
-              #confirmPasswordField="ngModel" 
-              [(ngModel)]="confirmPassword"
-              type="password" 
-              name="confirmPassword" 
-              class="form-control" 
-              id="confirmPassword"
-              required
-             /> 
-          
-             @if(confirmPasswordField.dirty && confirmPasswordField.hasError('required')) {
-              
-              <div class="invalid-tooltip"> Le password confirmed est obligatoire</div>
-              }                      
-            </div>
-               
-        <div class="col-auto">
-                    <span id="selectedHelpInline" class="form-text">
-                          
-                        </span>
-            </div>
-       
-        </div>
+                 
         
 
    
-        <div class="row offset-sm-2">
-            <div class="col-auto">
-                <button  type="submit"
-                class="btn btn-primary"
-                [disabled]="signupForm.invalid">S'inscrire</button>
-            </div>
-            <div class="col-auto">
-                <button type="reset" class="btn btn-secondary ms-2">Annuler</button>
-            </div>
-        </div>
+       
 
 
         
             
-
+    </div>
         </fieldset> 
     </form>
+
+
 </div>
 
 <h3>Toutes les donnees: {{ donnee()}}</h3>
