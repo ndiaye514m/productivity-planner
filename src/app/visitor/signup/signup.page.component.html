@@ -132,7 +132,7 @@
                         id="confirmPassword"
                         autocomplete="new-password"
                         [class.is-invalid]="confirmPasswordField.dirty && confirmPasswordField.invalid"
-                        [class.is-valid]="confirmPasswordField.dirty && confirmPasswordField.valid"
+                        
                         required
                     /> 
                     
@@ -144,35 +144,20 @@
                                                    
                 </div>
 
-               <!-- <div class="row mt-5 offset-sm-2">
-                    <div class="col-auto">
-                        <button  type="submit"
-                        class="btn btn-primary"
-                        [disabled]="signupForm.invalid">S'inscrire</button>
-                    </div>
-                    <div class="col-auto">
-                        <button type="reset" class="btn btn-secondary ms-2">Annuler</button>
-                    </div>
-                </div>btn-lg btn-block-->
+
                 <div class="col-sm-3  mx-auto">
                 <div class="wrapper mt-5 offset-sm-2 mx-auto">
                     
                         <button  type="submit"
                         class="btn btn-primary col-sm-3 w-100"
-                        [disabled]="signupForm.invalid">S'inscrire</button>
+                        [disabled]="signupForm.invalid || !isPasswordMatchValid()">S'inscrire</button>
                   
                 </div>
             </div>
              
         </div>
-    
-                 
-        
-
-   
+                        
        
-
-
         
             
     </div>
@@ -183,5 +168,7 @@
 </div>
 
 <h3>Toutes les donnees: {{ donnee()}}</h3>
+<h3>Est ce que les passwords matchs? {{ isPasswordMatchValid()}}</h3>
+
 <p>register works!</p>
 
