@@ -3,10 +3,9 @@ import { FormGroup, FormsModule } from '@angular/forms';
 import { AuthenticationService } from '../../core/authentication.service';
 
 @Component({
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './signup.page.component.html',
-  styleUrl: './signup.page.component.scss'
+    imports: [FormsModule],
+    templateUrl: './signup.page.component.html',
+    styleUrl: './signup.page.component.scss'
 })
 export class SignupPageComponent {
 

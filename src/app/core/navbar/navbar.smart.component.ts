@@ -3,12 +3,11 @@ import { NavbarLogoSmartComponent } from "./navbar-logo/navbar-logo.smart.compon
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [NavbarLogoSmartComponent,RouterLink],
-  templateUrl: './navbar.smart.component.html',
-  styleUrl: './navbar.smart.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-navbar',
+    imports: [NavbarLogoSmartComponent, RouterLink],
+    templateUrl: './navbar.smart.component.html',
+    styleUrl: './navbar.smart.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarSmartComponent {
 
