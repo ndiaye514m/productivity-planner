@@ -17,9 +17,8 @@ describe('HomepageFeatureCardListDumbComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomepageFeatureCardListDumbComponent]
-    })
-    .compileComponents();
+      imports: [HomepageFeatureCardListDumbComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HomepageFeatureCardListDumbComponent);
     component = fixture.componentInstance;
@@ -29,10 +28,10 @@ describe('HomepageFeatureCardListDumbComponent', () => {
 
   beforeEach(() => {
     cardList = fixture.debugElement.queryAll(
-      By.css('[data-testid="feature-card"]')
+      By.css('[data-testid="feature-card"]'),
     );
     cardTitleList = fixture.debugElement.queryAll(
-      By.css('[data-testid="feature-card-title"]')
+      By.css('[data-testid="feature-card-title"]'),
     );
   });
 
@@ -48,7 +47,7 @@ describe('HomepageFeatureCardListDumbComponent', () => {
     fixture.componentRef.setInput('featureCardList', []);
     fixture.detectChanges();
     cardList = fixture.debugElement.queryAll(
-      By.css('[data-testid="feature-card"]')
+      By.css('[data-testid="feature-card"]'),
     );
     expect(cardList.length).toBe(0);
   });
@@ -56,7 +55,7 @@ describe('HomepageFeatureCardListDumbComponent', () => {
   it('should display correct titles in each card', () => {
     cardTitleList.forEach((title, index) => {
       expect(title.nativeElement.textContent).toContain(
-        featureCardList[index].name
+        featureCardList[index].name,
       );
     });
   });

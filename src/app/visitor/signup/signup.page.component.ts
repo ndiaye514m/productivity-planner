@@ -3,14 +3,13 @@ import { FormGroup, FormsModule } from '@angular/forms';
 import { AuthenticationService } from '../../core/authentication.service';
 
 @Component({
-    imports: [FormsModule],
-    templateUrl: './signup.page.component.html',
-    styleUrl: './signup.page.component.scss'
+  imports: [FormsModule],
+  templateUrl: './signup.page.component.html',
+  styleUrl: './signup.page.component.scss',
 })
 export class SignupPageComponent {
-
-  productFormGroup!:FormGroup;
-  submitted?:boolean=false;
+  productFormGroup!: FormGroup;
+  submitted?: boolean = false;
 
   readonly authenticationService = inject(AuthenticationService);
   readonly name = signal('');
@@ -19,26 +18,30 @@ export class SignupPageComponent {
   readonly confirmPassword = signal('');
 
   readonly isPasswordMatchValid = computed(
-    () => this.password() === this.confirmPassword()
+    () => this.password() === this.confirmPassword(),
   );
-  
-  donnee=computed(()=> `${this.name()} ${this.email()} ${this.password()} ${this.confirmPassword()}`);
+
+  donnee = computed(
+    () =>
+      `${this.name()} ${this.email()} ${this.password()} ${this.confirmPassword()}`,
+  );
   onSaveProduct() {
-    console.log("save a product..");
-    this.submitted=true;
+    console.log('save a product..');
+    this.submitted = true;
     /*if(this.productFormGroup?.invalid) return
     this.productsService.saveProduct(this.productFormGroup?.value)
     .subscribe(data=>{
       alert("Success Saving Product");
   
     });*/
-    }
-
-     onSubmit() {
-    console.log('Form submitted');
-    this.authenticationService.register(this.email(),this.password()).subscribe((response)=>{
-      console.log('User registered with id: ',response.userId)});
   }
 
-    
+  onSubmit() {
+    console.log('Form submitted');
+    this.authenticationService
+      .register(this.email(), this.password())
+      .subscribe((response) => {
+        console.log('User registered with id: ', response.userId);
+      });
+  }
 }

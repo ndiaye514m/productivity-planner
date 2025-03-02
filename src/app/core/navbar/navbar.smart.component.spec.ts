@@ -12,9 +12,8 @@ describe('NavbarSmartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavbarSmartComponent]
-    })
-    .compileComponents();
+      imports: [NavbarSmartComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NavbarSmartComponent);
     component = fixture.componentInstance;
@@ -22,8 +21,8 @@ describe('NavbarSmartComponent', () => {
     fixture.detectChanges();
   });
 
-  beforeEach(()=>{
-      title=debugElement.query(By.css('[data-testid=navbar-title]'));
+  beforeEach(() => {
+    title = debugElement.query(By.css('[data-testid=navbar-title]'));
   });
 
   it('should create', () => {

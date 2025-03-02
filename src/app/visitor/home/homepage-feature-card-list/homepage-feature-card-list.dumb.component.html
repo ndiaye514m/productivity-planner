@@ -1,12 +1,12 @@
-  <!--<div class="container"> 
+<!--<div class="container"> 
     <div class="row justify-content-around">
     <div class="col-4">
       <div class="card text-center">
         <div class="card-header">
             <h4 style="font-weight: bold">Planifier sa semaine</h4> 
            </div>-->
-       <!-- <img [src]="ImagePathWeek" class="classecard mx-auto" alt="...">-->
-        <!--<div class="card-body mx-auto">
+<!-- <img [src]="ImagePathWeek" class="classecard mx-auto" alt="...">-->
+<!--<div class="card-body mx-auto">
                 <p class="card-text">Visibilité sur les 7 prochains jours</p>
         </div>
       </div>
@@ -16,8 +16,8 @@
         <div class="card-header">
             <h4 style="font-weight: bold">Atteindre ses objectifs</h4> 
            </div>-->
-       <!-- <img [src]="ImagePathTrophy" class="classecard mx-auto" alt="...">-->
-       <!-- <div class="card-body mx-auto">
+<!-- <img [src]="ImagePathTrophy" class="classecard mx-auto" alt="...">-->
+<!-- <div class="card-body mx-auto">
           <p class="card-text">Priorisation des tâches</p>
         </div>
       </div>
@@ -27,9 +27,9 @@
         <div class="card-header">
             <h4 style="font-weight: bold">Analyser sa productivité</h4> 
            </div>-->
-       <!-- <img [src]="ImagePathStats" class="card-img-top" alt="...">-->
-      <!-- <img [src]="ImagePathStats" class="classecard mx-auto" alt="...">-->
-       <!-- <div class="card-body mx-auto">
+<!-- <img [src]="ImagePathStats" class="card-img-top" alt="...">-->
+<!-- <img [src]="ImagePathStats" class="classecard mx-auto" alt="...">-->
+<!-- <div class="card-body mx-auto">
           <p class="card-text">Visualiser le travail accompli</p>
         </div>
       </div>
@@ -39,21 +39,25 @@
 </div>
 <p>homepage-feature-card-list works!</p>-->
 <div class="container text-center mt-1">
-    <div class="row">
-      @for(feature of featureCardList(); track feature.name) {
+  <div class="row">
+    @for (feature of featureCardList(); track feature.name) {
       <div class="col-md-4">
         <div class="card" data-testid="feature-card">
           <div class="card-header" data-testid="feature-card-title">
-            <h4 style="font-weight: bold"> {{ feature.name }}</h4>
+            <h4 style="font-weight: bold">{{ feature.name }}</h4>
           </div>
           <div class="card-body mx-auto">
-           <!-- <i class="bi bi-star-fill h1"></i>-->
-            <i class="bi text-warning" [ngClass]="'bi-' + feature.icon" style="font-weight: bold;font-size: 90px;"></i>
+            <!-- <i class="bi bi-star-fill h1"></i>-->
+            <i
+              class="bi text-warning"
+              [ngClass]="'bi-' + feature.icon"
+              style="font-weight: bold; font-size: 90px"
+            ></i>
             <p class="card-title">{{ feature.description }}</p>
             <!--<p class="card-text">{{ feature.description }}</p>-->
           </div>
         </div>
       </div>
-      }
-    </div>
+    }
   </div>
+</div>

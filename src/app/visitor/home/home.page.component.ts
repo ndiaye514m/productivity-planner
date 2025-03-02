@@ -3,33 +3,29 @@ import { HomeBannerDumbComponent } from './home-banner/home-banner.dumb.componen
 import { HomepageFeatureCardListDumbComponent } from './homepage-feature-card-list/homepage-feature-card-list.dumb.component';
 
 @Component({
-    imports: [HomeBannerDumbComponent, HomepageFeatureCardListDumbComponent],
-    templateUrl: './home.page.component.html',
-    styleUrl: './home.page.component.scss'
+  imports: [HomeBannerDumbComponent, HomepageFeatureCardListDumbComponent],
+  templateUrl: './home.page.component.html',
+  styleUrl: './home.page.component.scss',
 })
 export class HomePageComponent {
-
-  featureCardList=signal([
+  featureCardList = signal([
     {
-      name:'Planifier sa semaine',
-      icon:'calendar-heart-fill',
-      description:'Visibilité sur les 7 prochains jours',
+      name: 'Planifier sa semaine',
+      icon: 'calendar-heart-fill',
+      description: 'Visibilité sur les 7 prochains jours',
     },
     {
-      name:'Atteindre ses objectifs',
-      icon:'trophy-fill',
-      description:'Priorisation des tâches',
+      name: 'Atteindre ses objectifs',
+      icon: 'trophy-fill',
+      description: 'Priorisation des tâches',
     },
     {
-      name:'Analyser sa productivité',
-      icon:'bar-chart-line-fill',
-      description:'Visualiser le travail accompli',
+      name: 'Analyser sa productivité',
+      icon: 'bar-chart-line-fill',
+      description: 'Visualiser le travail accompli',
     },
-
   ]);
   onBannerClicked() {
     console.log('Banner clicked');
-}
-
- 
+  }
 }

@@ -8,12 +8,12 @@ import { AuthenticationFirebaseService } from './core/ authentication-firebase.s
 
 export const appConfig: ApplicationConfig = {
   providers: [
-     provideZoneChangeDetection({ eventCoalescing: true }),
-     provideRouter(routes),
-     provideHttpClient(),
-     {
-      provide:AuthenticationService,
-      useClass:AuthenticationFirebaseService
-     }   
-    ]
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideHttpClient(),
+    {
+      provide: AuthenticationService,
+      useClass: AuthenticationFirebaseService,
+    },
+  ],
 };
