@@ -55,7 +55,9 @@ jobs:
         #Check if main exist
       - name: Check if main exist
         run: |
-        if [ -d "main.ts"]; then echo dir exists && echo ok; else echo no dir; fi
+          if test -f "main.ts"; then
+               echo "file exist ..."
+          fi
       # Tests ci13Nov sans erreurs
       - name: Test
         run: npm run test
