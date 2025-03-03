@@ -61,9 +61,9 @@ jobs:
        #Check if environments/environment.ts exist
        - name: Check if env exist
       - run: |
-         if test -f "src/environments/environment.ts"; then
+          if test -f "src/environments/environment.ts"; then
               echo "environment file exist ..."
-         fi
+          fi
       # Tests ci13Nov sans erreurs
       - name: Test
         run: npm run test
