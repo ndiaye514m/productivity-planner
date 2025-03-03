@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SignupPageComponent } from './signup.page.component';
+import { provideRouter } from '@angular/router';
+import { AuthenticationService } from '../../core/authentication.service';
+import { AuthenticationFirebaseService } from '../../core/ authentication-firebase.service';
 
 describe('SignupPageComponent', () => {
   let component: SignupPageComponent;
@@ -8,7 +11,9 @@ describe('SignupPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SignupPageComponent],
+      imports: [SignupPageComponent],//i added
+      //providers: [provideRouter([])],
+      providers:[AuthenticationService,AuthenticationFirebaseService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SignupPageComponent);
