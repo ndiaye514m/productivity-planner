@@ -40,7 +40,7 @@ jobs:
       - name: Lint
         run: npm run lint
 
-        #Set environment variables
+      #Set environment variables
       - name: Create environment file
         run: |
           mkdir environments
@@ -53,11 +53,25 @@ jobs:
         #echo "Creating development environment file ..."
         #echo "${{ secrets.FIREBASE_CONFIG_DEV }}"  >> environments/environment.dev.ts
         #Check if main exist
+       #Set environment variables
+      - name: Create  file montest
+        run: |
+         mkdir environments
+         echo "Creating montest file ..."
+         echo "bonjour"  >> environments/montest.ts
+      #Check if src/main.ts exist     
       - name: Check if main exist
         run: |
           if test -f "src/main.ts"; then
                echo "file exist ..."
           fi
+      #Check if environments/montest.ts exist     
+      - name: Check if montest exist
+        run: |
+          if test -f "environments/montest.ts"; then
+               echo "montest file exist ..."
+          fi
+       #Check if environments/environment.ts exist    
        #Check if environments/environment.ts exist
       - name: Check if env exist
         run: |
