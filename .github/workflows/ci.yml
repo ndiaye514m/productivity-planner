@@ -58,6 +58,12 @@ jobs:
           if test -f "src/main.ts"; then
                echo "file exist ..."
           fi
+       #Check if environments/environment.ts exist
+       - name: Check if main exist
+       run: |
+         if test -f "src/environments/environment.ts"; then
+              echo "src/environments/environment.ts file exist ..."
+         fi
       # Tests ci13Nov sans erreurs
       - name: Test
         run: npm run test
