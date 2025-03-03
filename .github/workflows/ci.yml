@@ -55,7 +55,7 @@ jobs:
         #Check if main exist
       - name: Check if main exist
         run: |
-          if test -f "main.ts"; then
+          if test -f "src/main.ts"; then
                echo "file exist ..."
           fi
       # Tests ci13Nov sans erreurs
