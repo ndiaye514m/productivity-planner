@@ -54,11 +54,7 @@ jobs:
         #echo "${{ secrets.FIREBASE_CONFIG_DEV }}"  >> environments/environment.dev.ts
         #Check if main exist
        #Set environment variables
-      - name: Create  file montest
-        run: |
-         mkdir environments
-         echo "Creating montest file ..."
-         echo "bonjour"  >> environments/montest.ts
+     
       #Check if src/main.ts exist     
       - name: Check if main exist
         run: |
@@ -66,10 +62,10 @@ jobs:
                echo "file exist ..."
           fi
       #Check if environments/montest.ts exist     
-      - name: Check if montest exist
+      - name: Check if environments exist
         run: |
-          if test -f "environments/montest.ts"; then
-               echo "montest file exist ..."
+          if test -f "environments"; then
+               echo "environments exist ..."
           fi
        #Check if environments/environment.ts exist    
        #Check if environments/environment.ts exist
