@@ -52,6 +52,12 @@ jobs:
         #echo "${{ secrets.FIREBASE_CONFIG_STAG }}"  >> environments/environment.stag.ts
         #echo "Creating development environment file ..."
         #echo "${{ secrets.FIREBASE_CONFIG_DEV }}"  >> environments/environment.dev.ts
+        #Check if main exist
+      - name: Check if main exist
+        if: ${{ hashFiles('src/main.ts') != '' }}
+          run: |
+          echo "Main file exists..."
+
       # Tests ci13Nov sans erreurs
       - name: Test
         run: npm run test
