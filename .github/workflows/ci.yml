@@ -76,12 +76,19 @@ jobs:
           if test -f "src/main.ts"; then
                echo "main file exist ..."
           fi
-      #Check if environments/envenvironment.ts exist
-      - name: Check if env exist
+      #Check if mondossier/envenvironment.ts exist
+      - name: Check if mondossier/envenvironment exist
         run: |
           if test -f "mondossier/envenvironment.ts"; then
                echo "envenvironment file exist ..."
                cat mondossier/envenvironment.ts
+          fi
+      #Check if environments/envenvironment.ts exist
+      - name: Check if env exist
+        run: |
+          if test -f "environments/environment.ts"; then
+               echo "envenvironment file exist ..."
+               cat environments/environment.ts
           fi
       # Tests ci13Nov sans erreurs
       - name: Test
