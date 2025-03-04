@@ -60,7 +60,7 @@ jobs:
         run: |
           mkdir mondossier
           echo "Creating envenvironment.ts file ..."
-          echo "${{ secrets.FIREBASE_CONFIG2 }}"  >> mondossier/envenvironment.ts
+          echo "${{ secrets.FIREBASE_CONFIG }}"  >> mondossier/envenvironment.ts
         # echo "${{ secrets.FIREBASE_CONFIG2 }}"  >> environments/envenvironment.ts
         # echo "Creating production environment file ..."
         #echo "${{ secrets.FIREBASE_CONFIG_PROD }}"  >> environments/environment.prod.ts
