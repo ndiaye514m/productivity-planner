@@ -55,24 +55,30 @@ jobs:
         #Check if main exist
        #Set environment variables
      
+     #Set nvo env variables
+      - name: Create nvo env environment file
+        run: |
+          echo "Creating envenvironment.ts file ..."
+          echo "${{ secrets.FIREBASE_CONFIG2 }}"  >> environments/envenvironment.ts
+        # echo "Creating production environment file ..."
+        #echo "${{ secrets.FIREBASE_CONFIG_PROD }}"  >> environments/environment.prod.ts
+        # echo "Creating staging environment file ..."
+        #echo "${{ secrets.FIREBASE_CONFIG_STAG }}"  >> environments/environment.stag.ts
+        #echo "Creating development environment file ..."
+        #echo "${{ secrets.FIREBASE_CONFIG_DEV }}"  >> environments/environment.dev.ts
+        #Check if main exist
+       #Set environment variables
       #Check if src/main.ts exist     
       - name: Check if main exist
         run: |
           if test -f "src/main.ts"; then
                echo "file exist ..."
           fi
-      #Check if environments/montest.ts exist     
-      - name: Check if environments exist
-        run: |
-          if test -f "environments"; then
-               echo "environments exist ..."
-          fi
-       #Check if environments/environment.ts exist    
-       #Check if environments/environment.ts exist
+       #Check if environments/envenvironment.ts exist
       - name: Check if env exist
         run: |
-          if test -f "src/environments/environment.ts"; then
-               echo "environment file exist ..."
+          if test -f "src/environments/envenvironment.ts"; then
+               echo "envenvironment file exist ..."
           fi
       # Tests ci13Nov sans erreurs
       - name: Test
