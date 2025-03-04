@@ -59,7 +59,8 @@ jobs:
       - name: Create nvo env environment file
         run: |
           echo "Creating envenvironment.ts file ..."
-          echo "${{ secrets.FIREBASE_CONFIG2 }}"  >> environments/envenvironment.ts
+          echo "bonjour"  >> environments/envenvironment.ts
+        # echo "${{ secrets.FIREBASE_CONFIG2 }}"  >> environments/envenvironment.ts
         # echo "Creating production environment file ..."
         #echo "${{ secrets.FIREBASE_CONFIG_PROD }}"  >> environments/environment.prod.ts
         # echo "Creating staging environment file ..."
