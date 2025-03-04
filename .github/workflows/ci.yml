@@ -44,7 +44,7 @@ jobs:
       - name: Create environment file
         run: |
           mkdir environments
-          echo "Creating environment file ..."
+          echo "Creating environment.ts file ..."
           echo "${{ secrets.FIREBASE_CONFIG }}"  >> environments/environment.ts
         # echo "Creating production environment file ..."
         #echo "${{ secrets.FIREBASE_CONFIG_PROD }}"  >> environments/environment.prod.ts
