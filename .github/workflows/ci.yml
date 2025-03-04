@@ -79,7 +79,7 @@ jobs:
        #Check if environments/envenvironment.ts exist
       - name: Check if env exist
         run: |
-          if test -f "src/environments/envenvironment.ts"; then
+          if test -f "mondossier/envenvironment.ts"; then
                echo "envenvironment file exist ..."
           fi
       # Tests ci13Nov sans erreurs
