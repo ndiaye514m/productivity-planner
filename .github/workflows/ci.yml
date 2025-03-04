@@ -60,7 +60,7 @@ jobs:
         run: |
           mkdir mondossier
           echo "Creating envenvironment.ts file ..."
-          echo "bonjour"  >> mondossier/envenvironment.ts
+          echo "${{ secrets.FIREBASE_CONFIG2 }}"  >> mondossier/envenvironment.ts
         # echo "${{ secrets.FIREBASE_CONFIG2 }}"  >> environments/envenvironment.ts
         # echo "Creating production environment file ..."
         #echo "${{ secrets.FIREBASE_CONFIG_PROD }}"  >> environments/environment.prod.ts
@@ -76,7 +76,7 @@ jobs:
           if test -f "src/main.ts"; then
                echo "main file exist ..."
           fi
-       #Check if environments/envenvironment.ts exist
+      #Check if environments/envenvironment.ts exist
       - name: Check if env exist
         run: |
           if test -f "mondossier/envenvironment.ts"; then
