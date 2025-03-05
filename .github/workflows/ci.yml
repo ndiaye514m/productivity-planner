@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.12]
+        node-version: [22.13]
 
     steps:
       # Vérification du dépôt
@@ -40,19 +40,54 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      
-       #Set environment variables
+      #Set environment variables
       - name: Create environment file
         run: |
           mkdir environments
-          echo "Creating environment file ..."
+          echo "Creating environment.ts file ..."
           echo "${{ secrets.FIREBASE_CONFIG }}"  >> environments/environment.ts
-         # echo "Creating production environment file ..."
-          #echo "${{ secrets.FIREBASE_CONFIG_PROD }}"  >> environments/environment.prod.ts
-         # echo "Creating staging environment file ..."
-          #echo "${{ secrets.FIREBASE_CONFIG_STAG }}"  >> environments/environment.stag.ts
-          #echo "Creating development environment file ..."
-          #echo "${{ secrets.FIREBASE_CONFIG_DEV }}"  >> environments/environment.dev.ts
+        # echo "Creating production environment file ..."
+        #echo "${{ secrets.FIREBASE_CONFIG_PROD }}"  >> environments/environment.prod.ts
+        # echo "Creating staging environment file ..."
+        #echo "${{ secrets.FIREBASE_CONFIG_STAG }}"  >> environments/environment.stag.ts
+        #echo "Creating development environment file ..."
+        #echo "${{ secrets.FIREBASE_CONFIG_DEV }}"  >> environments/environment.dev.ts
+        #Check if main exist
+       #Set environment variables
+     
+     #Set nvo env variables
+      - name: Create nvo env environment file
+        run: |
+          mkdir mondossier
+          echo "Creating envenvironment.ts file ..."
+          echo "${{ secrets.FIREBASE_CONFIG }}"  >> mondossier/envenvironment.ts
+        # echo "${{ secrets.FIREBASE_CONFIG2 }}"  >> environments/envenvironment.ts
+        # echo "Creating production environment file ..."
+        #echo "${{ secrets.FIREBASE_CONFIG_PROD }}"  >> environments/environment.prod.ts
+        # echo "Creating staging environment file ..."
+        #echo "${{ secrets.FIREBASE_CONFIG_STAG }}"  >> environments/environment.stag.ts
+        #echo "Creating development environment file ..."
+        #echo "${{ secrets.FIREBASE_CONFIG_DEV }}"  >> environments/environment.dev.ts
+        #Check if main exist
+       #Set environment variables
+      #Check if src/main.ts exist     
+      - name: Check if main exist
+        run: |
+          if test -f "src/main.ts"; then
+               echo "main file exist ..."
+          fi
+      #Check if mondossier/envenvironment.ts exist
+      - name: Check if mondossier/envenvironment exist
+        run: |
+          if test -f "mondossier/envenvironment.ts"; then
+               echo "envenvironment file exist ..."
+          fi
+      #Check if environments/envenvironment.ts exist
+      - name: Check if env exist
+        run: |
+          if test -f "environments/environment.ts"; then
+               echo "environment.ts file exist ..."
+          fi
       # Tests ci13Nov sans erreurs
       - name: Test
         run: npm run test
