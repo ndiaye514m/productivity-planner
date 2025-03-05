@@ -81,14 +81,12 @@ jobs:
         run: |
           if test -f "mondossier/envenvironment.ts"; then
                echo "envenvironment file exist ..."
-               cat mondossier/envenvironment.ts
           fi
       #Check if environments/envenvironment.ts exist
       - name: Check if env exist
         run: |
           if test -f "environments/environment.ts"; then
-               echo "envenvironment file exist ..."
-               cat environments/environment.ts
+               echo "environment.ts file exist ..."
           fi
       # Tests ci13Nov sans erreurs
       - name: Test
