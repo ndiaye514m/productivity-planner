@@ -1,15 +1,24 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { FormGroup, FormsModule } from '@angular/forms';
+import {FormsModule } from '@angular/forms';
 import { AuthenticationService } from '../../core/authentication.service';
+import { UserStore } from '../../core/store/user.store';
 
 @Component({
   imports: [FormsModule],
   templateUrl: './signup.page.component.html',
   styleUrl: './signup.page.component.scss',
+  //si on voulait provide le au niveau component on aurait fait
+  //providersUser:[UserStore]
 })
 export class SignupPageComponent {
-  productFormGroup!: FormGroup;
+  
   submitted?: boolean = false;
+  readonly store=inject(UserStore);
+  /*this.store.email()
+  this.store.username()
+  this.store.register(email,password)*/
+
+
 
   readonly authenticationService = inject(AuthenticationService);
   readonly name = signal('');
