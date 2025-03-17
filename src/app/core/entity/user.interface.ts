@@ -11,5 +11,5 @@ export interface User{
     email: string;
     password: string;
   }*/
-    export type Visitor= Omit<User,'id'>& {password: string};
-      
+   // export type Visitor= Omit<User,'id'>& {password: string};
+    export type Visitor= Pick<User,'name' | 'email'>& {password: string};
