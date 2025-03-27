@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SignupPageComponent } from './signup.page.component';
-import { AuthenticationService } from '../../core/authentication.service';
+import { AuthenticationService } from '../../core/port/authentication.service';
 import { AuthenticationFirebaseService } from '../../core/ authentication-firebase.service';
 
 describe('SignupPageComponent', () => {

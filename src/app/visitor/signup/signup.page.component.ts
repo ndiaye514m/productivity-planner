@@ -1,6 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import {FormsModule } from '@angular/forms';
-import { AuthenticationService } from '../../core/authentication.service';
+import { AuthenticationService } from '../../core/port/authentication.service';
 import { UserStore } from '../../core/store/user.store';
 import { Visitor } from '../../core/entity/user.interface';
 
