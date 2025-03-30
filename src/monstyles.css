@@ -59,3 +59,25 @@
   background-color: rgba(25, 135, 84, 0.9);
   border-radius: 0.25rem;
 }
+
+.monloginSignUpSeparator {
+  border-top: 1px solid #CBD2D6;
+  position: relative;
+  margin-top: 8.72%;
+  margin-bottom: 4.895%;
+  height: 15px;
+  text-align: center;
+  font-size: 83.34%;
+}
+
+.monloginSignUpSeparator .montextInSeparator {
+  background-color: #fff;
+  padding: 0 0.5em;
+  position: relative;
+  color: #6c7378;
+  top: -0.7em;
+}
+
+.montextInSeparator {
+  font-size: 15px;
+}
