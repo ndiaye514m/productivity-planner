@@ -1,10 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginPageComponent } from './login.page.component';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
+
+  let email: DebugElement;
+  let password: DebugElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -15,17 +20,79 @@ describe('LoginPageComponent', () => {
     fixture = TestBed.createComponent(LoginPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('when it load',()=>{
-    it.todo('should display email field');
-    it.todo('should display password field');
-    it.todo('should display login button');
+  describe('when page load',()=>{
+    it('should display email field',() => {
+      //Arrange
+      const email = fixture.debugElement.query(By.css('[data-testid="email"]'));
+     
+      //Act
+
+      //Assert
+      expect(email).toBeTruthy();
+    });
+
+    it('should display password field',()=>{
+
+       //Arrange
+       const password = fixture.debugElement.query(By.css('[data-testid="password"]'));
+     
+       //Act
+ 
+       //Assert
+       expect(password).toBeTruthy();
+    });
+    it('should display login button',()=>{
+       //Arrange
+       const submitbutton = fixture.debugElement.query(By.css('[data-testid="submit-button"]'));
+     
+       //Act
+ 
+       //Assert
+       expect(submitbutton).toBeTruthy();
+    });
     })
+
+  
+    describe('when user interact with email field', () => {
+      it('should display error message when field is empty',()=>{
+        //Arrange
+        const email = fixture.debugElement.query(By.css('[data-testid="email"]'));
+
+        //Act
+        email.nativeElement.value = '';
+       
+        email.nativeElement.dispatchEvent(new Event('input'));
+       
+        fixture.detectChanges();
+
+        const error = fixture.debugElement.query(By.css('[data-testid="error-email-required"]'));
+       
+
+       
+
+        const errorMessage = error.nativeElement.textContent;
+        //Assert
+        expect(errorMessage).toContain('Email is required.');
+
+        
+      });
+  
+      it.todo('should display error message when field do not contain a valid HTML5 email');
+    })
+
+    describe('when user interact with password field', () => {
+      it.todo('should display error message when field is empty');
+    }); 
+  
+
 
 
 });
