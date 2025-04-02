@@ -52,7 +52,7 @@
   "overrides": {
       "vite": {
         "esbuild": "^0.25.0"
-    },
-    "semver": "^7.5.2"
+    }
+    
   }
 }
