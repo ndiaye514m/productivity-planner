@@ -7,13 +7,13 @@
   </div>
   
   <div class="container mt-0">
-    <!-- <form (ngSubmit)="onSubmit()" #signupForm="ngForm"> -->
+    
         <div class="row">
             <div class="col col-lg-3">
                 
               </div>
               <div class="col">
-        <form>
+        <form (ngSubmit)="onSubmit()" #signupForm="ngForm" autocomplete="off">
             
         <fieldset class="border p-2">
         <legend class="float-none w-auto p-2">Déjà Membre</legend>
@@ -26,7 +26,7 @@
                 >E-mail</label
               >
             </div> -->
-            <div class="col-sm-6 position-relative mx-auto mb-3">
+            <div class="col-sm-6 position-relative mx-auto mb-5">
               <!--position relative pour tooltip-->
   
               <!-- <input
@@ -44,7 +44,8 @@
    -->
                 <input
                 data-testid="email"
-
+                #emailField="ngModel"
+                [(ngModel)]="email"
                 
                 type="email"
                 name="email"
@@ -55,7 +56,21 @@
                 
                 required
                 placeholder="Email"
+                [class.is-invalid]="emailField.dirty && emailField.invalid"
+                autocomplete="off"
+                email
                 />
+                @if (emailField.dirty && emailField.hasError("required")) {
+                  <div data-testid="error-email-required" class="moninvalid-tooltip">Email is required.</div>
+                }
+
+                @else if (emailField.dirty && emailField.hasError("pattern")) {
+                  
+                  <div data-testid="error-email-pattern" class="moninvalid-tooltip">Email must be valid.</div>
+                }
+                <!-- ou  @else if (emailField.dirty && emailField.hasError("email")) { --> 
+
+
               <!-- @if (emailField.dirty && emailField.hasError("required")) { -->
                 <!-- <div class="form-text text-danger">Email is required.</div>-->
               <!--   <div class="moninvalid-tooltip">L'E-mail est obligatoire</div>
@@ -82,13 +97,29 @@
               <input
               data-testid="password"
               
+              #passwordField="ngModel"
+              [(ngModel)]="password"
+
               type="password"
               name="password"
               class="form-control"
               id="password"
               placeholder="Password"
+              [class.is-invalid]="passwordField.dirty && passwordField.invalid"
               required
+            
+              autocomplete="off"
             />
+           
+            @if (passwordField.dirty && passwordField.hasError("required")) {
+              <div data-testid="error-password-required"  class="moninvalid-tooltip">Password is required.</div>
+            }
+
+       
+
+           
+
+
   <!-- 
               <input
                 #passwordField="ngModel"
@@ -106,7 +137,7 @@
               } -->
             </div>
   
-            <div class="col-sm-6 mx-auto">
+            <div class="col-sm-6 mx-auto ">
                 <div class="wrapper mt-5 offset-sm-2 mx-auto">
                  <!--  <button
                     type="submit"
@@ -118,7 +149,7 @@
                   <button
                   data-testid="submit-button"
                   type="submit"
-                  class="btn btn-primary col-sm-3 w-100"
+                  class="btn btn-primary col-sm-3 w-100 mt-4"
                  
                 >
                   Se Connecter
@@ -150,9 +181,7 @@
 
             </div>
   </div>
-  
- <!--  <h3>Toutes les donnees: {{ donnee() }}</h3>
-  <h3>Est ce que les passwords matchs? {{ isPasswordMatchValid() }}</h3> -->
+  <h3>Toutes les donnees: {{ donnee() }}</h3>
   
   <p>register works!</p>
   

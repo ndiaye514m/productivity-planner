@@ -35,27 +35,19 @@
 
             @if (nameField.dirty && nameField.hasError("required")) {
               <!--<div class="form-text text-danger">Name is required.</div>-->
-              <div class="moninvalid-tooltip">
-                Le Nom du nouveau membre est obligatoire
-              </div>
+              <div data-testid="error-name-required" class="moninvalid-tooltip">Name is required.</div>
             }
             @if (nameField.dirty && nameField.hasError("pattern")) {
               <!--<div class="form-text text-danger">Name is required.</div>-->
-              <div class="moninvalid-tooltip">
-                Le Nom doit contenir que des lettres
-              </div>
+              <div data-testid="error-name-pattern" class="moninvalid-tooltip">Name must contain only letters.</div>
             }
             @if (nameField.dirty && nameField.hasError("minlength")) {
               <!--<div class="form-text text-danger">Name is required.</div>-->
-              <div class="moninvalid-tooltip">
-                Le Nom doit contenir au moins 3 caractères
-              </div>
+              <div data-testid="error-name-minlength" class="moninvalid-tooltip">Name must contain at least 3 caracters.</div>
             }
             @if (nameField.dirty && nameField.hasError("maxlength")) {
               <!--<div class="form-text text-danger">Name is required.</div>-->
-              <div class="moninvalid-tooltip">
-                Le Nom doit contenir au plus 20 caractères
-              </div>
+              <div data-testid="error-name-maxlength" class="moninvalid-tooltip">Name must contain maximum 20 caracters.</div>
             }
           </div>
           <div class="col-sm-4 mx-auto">
@@ -67,6 +59,7 @@
             <!--position relative pour tooltip-->
 
             <input
+              data-testid="email"
               #emailField="ngModel"
               [(ngModel)]="email"
               type="email"
@@ -81,17 +74,10 @@
 
             @if (emailField.dirty && emailField.hasError("required")) {
               <!-- <div class="form-text text-danger">Email is required.</div>-->
-              <div class="moninvalid-tooltip">L'E-mail est obligatoire</div>
-            } @else if (emailField.dirty && emailField.hasError("email")) {
-              <!-- <div class="form-text text-danger">Email is required.</div>-->
-              <div class="moninvalid-tooltip">
-                Veuillez entrer une adresse email valide
-              </div>
+              <div data-testid="error-email-required" class="moninvalid-tooltip">Email is required.</div>
             } @else if (emailField.dirty && emailField.hasError("pattern")) {
               <!-- <div class="form-text text-danger">Email is required.</div>-->
-              <div class="moninvalid-tooltip">
-                Votre devez saisir une bonne adresse mail
-              </div>
+              <div data-testid="error-email-pattern" class="moninvalid-tooltip">Email must be valid.</div>
             }
           </div>
 
@@ -104,6 +90,7 @@
             <!--position relative pour tooltip-->
 
             <input
+              data-testid="password"
               #passwordField="ngModel"
               [(ngModel)]="password"
               type="password"
@@ -112,11 +99,22 @@
               id="password"
               [class.is-invalid]="passwordField.dirty && passwordField.invalid"
               required
+              minlength="8"
+              
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$"
             />
 
             @if (passwordField.dirty && passwordField.hasError("required")) {
-              <div class="moninvalid-tooltip">Le password est obligatoire</div>
+              <div data-testid="error-password-required" class="moninvalid-tooltip">Password is required.</div>
             }
+            @if (passwordField.dirty && passwordField.hasError("minlength")) {
+              <div data-testid="error-password-minlength" class="moninvalid-tooltip">Password must contain at least 8 characters.</div>
+            }
+
+            @if (passwordField.dirty && passwordField.hasError("pattern")) {
+              <div data-testid="error-password-pattern" class="moninvalid-tooltip">Password must contain at least one uppercase letter, one lowercase letter, one digit and one special character.</div>
+            }
+
           </div>
 
           <div class="col-sm-4 mx-auto">
@@ -128,6 +126,7 @@
             <!--position relative pour tooltip-->
 
             <input
+              data-testid="confirm-password"
               #confirmPasswordField="ngModel"
               [(ngModel)]="confirmPassword"
               type="password"
@@ -145,15 +144,19 @@
               confirmPasswordField.dirty &&
               confirmPasswordField.hasError("required")
             ) {
-              <div class="moninvalid-tooltip">
-                La confirmation est obligatoire
-              </div>
+              <div data-testid="error-confirm-password-required" class="moninvalid-tooltip">Confirm password is required.</div>
+            }
+            @else if (
+              confirmPasswordField.dirty && isPasswordMatchValid()===false
+          ) {
+              <div data-testid="error-confirm-password-match" class="moninvalid-tooltip">Passwords do not match.</div>
             }
           </div>
 
           <div class="col-sm-3 mx-auto">
             <div class="wrapper mt-5 offset-sm-2 mx-auto">
               <button
+              data-testid="submit-button"
                 type="submit"
                 class="btn btn-primary col-sm-3 w-100"
                 [disabled]="signupForm.invalid || !isPasswordMatchValid()"
