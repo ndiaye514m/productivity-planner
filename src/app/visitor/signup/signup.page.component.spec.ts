@@ -242,7 +242,7 @@ describe('SignupPageComponent', () => {
         password: 'Abc1$def'
       });
     });
-  });*/
+  });à revoir*/
 
 });
 
