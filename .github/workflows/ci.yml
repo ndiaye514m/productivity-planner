@@ -45,7 +45,7 @@ jobs:
         run: |
           mkdir src/environments
           echo "Creating environment.ts file ..."
-          echo "${{ secrets.FIREBASE_CONFIG }}"  >> src/environments/environment.ts
+          echo "${{secrets.FIREBASE_CONFIG}}"  >> src/environments/environment.ts
       - name: Test
         run: npm run test
 
