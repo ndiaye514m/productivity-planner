@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
-//import { environment } from '@env/environment';
+import { environment } from '@env/environment';
 import { map, Observable } from 'rxjs';
 import {
   AuthenticationService,
@@ -9,10 +8,12 @@ import {
   RegisterResponse,
 } from '../port/authentication.service';
 
+//import { environment } from '../../../environments/environment';
+
 /* Represents the payload of the response when registering a new user in firebase
  *https://firebase.google.com/docs/reference/rest/auth?hl=fr#section-create-email-password
  */
-
+//export const environment = {};
 interface FirebaseResponseSignup {
   idToken: string;
   email: string;
