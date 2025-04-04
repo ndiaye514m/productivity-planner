@@ -47,6 +47,13 @@ jobs:
           echo "Creating environment.ts file ..."
           echo "${{ secrets.FIREBASE_CONFIG }}"  >> src/environments/environment.ts
       
+      #Check if src/environments/envenvironment.ts exist
+      - name: Check if env exist
+        run: |
+          if test -f "src/environments/environment.ts"; then
+               echo "environment.ts file exist ..."
+          fi
+      
       #Tests    
       - name: Test
         run: npm run test
