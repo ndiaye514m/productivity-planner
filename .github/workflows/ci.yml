@@ -45,7 +45,7 @@ jobs:
         run: |
           mkdir src/environments
           echo "Creating environment.ts file ..."
-          echo "${{ secrets.FIREBASE_CONFIG }}"  >> src/environments/environment.ts
+          echo "${{ secrets.FIREBASE_CONFIG2 }}"  >> src/environments/environment.ts
       
       #Check if src/environments/envenvironment.ts exist
       - name: Check if env exist
