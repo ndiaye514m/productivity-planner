@@ -50,7 +50,7 @@ jobs:
       #Check if src/environments/envenvironment.ts exist
       - name: Check if env exist
         run: |
-          if test -f "src/environments/environment.ts"; then
+          if test -f "src/environments/environment2.ts"; then
                echo "environment.ts file exist ..."
           fi
       
