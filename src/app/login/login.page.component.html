@@ -1,0 +1,187 @@
+<div class="container">
+    <div class="row mt-2" style="height: 35px">
+      <div style="color: green">
+        <h1 class="text-center">CONNEXION</h1>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container mt-0">
+    
+        <div class="row">
+            <div class="col col-lg-3">
+                
+              </div>
+              <div class="col">
+        <form (ngSubmit)="onSubmit()" #signupForm="ngForm" autocomplete="off">
+            
+        <fieldset class="border p-2">
+        <legend class="float-none w-auto p-2">Déjà Membre</legend>
+        <div class="row justify-content-center">
+          <div class="mb-3">
+                     
+    
+           <!--  <div class="col-sm-5 mx-auto">
+              <label for="email" class="form-label col-form-label fw-bold"
+                >E-mail</label
+              >
+            </div> -->
+            <div class="col-sm-6 position-relative mx-auto mb-5">
+              <!--position relative pour tooltip-->
+  
+              <!-- <input
+                #emailField="ngModel"
+                [(ngModel)]="email"
+                type="email"
+                name="email"
+                class="form-control"
+                id="email"
+                autocomplete="email"
+                pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                [class.is-invalid]="emailField.dirty && emailField.invalid"
+                required
+              />
+   -->
+                <input
+                data-testid="email"
+                #emailField="ngModel"
+                [(ngModel)]="email"
+                
+                type="email"
+                name="email"
+                class="form-control"
+                id="email"
+                autocomplete="email"
+                pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                
+                required
+                placeholder="Email"
+                [class.is-invalid]="emailField.dirty && emailField.invalid"
+                autocomplete="off"
+                email
+                />
+                @if (emailField.dirty && emailField.hasError("required")) {
+                  <div data-testid="error-email-required" class="moninvalid-tooltip">Email is required.</div>
+                }
+
+                @else if (emailField.dirty && emailField.hasError("pattern")) {
+                  
+                  <div data-testid="error-email-pattern" class="moninvalid-tooltip">Email must be valid.</div>
+                }
+                <!-- ou  @else if (emailField.dirty && emailField.hasError("email")) { --> 
+
+
+              <!-- @if (emailField.dirty && emailField.hasError("required")) { -->
+                <!-- <div class="form-text text-danger">Email is required.</div>-->
+              <!--   <div class="moninvalid-tooltip">L'E-mail est obligatoire</div>
+              } @else if (emailField.dirty && emailField.hasError("email")) { -->
+                <!-- <div class="form-text text-danger">Email is required.</div>-->
+              <!--   <div class="moninvalid-tooltip">
+                  Veuillez entrer une adresse email valide
+                </div>
+              } @else if (emailField.dirty && emailField.hasError("pattern")) { -->
+                <!-- <div class="form-text text-danger">Email is required.</div>-->
+               <!--  <div class="moninvalid-tooltip">
+                  Votre devez saisir une bonne adresse mail
+                </div>
+              } -->
+            </div>
+  
+          <!--   <div class="col-sm-5 mx-auto">
+              <label for="password" class="col-form-label fw-bold"
+                >Mot de passe</label
+              >
+            </div> -->
+            <div class="col-sm-6 position-relative mx-auto mb-3">
+              <!--position relative pour tooltip-->
+              <input
+              data-testid="password"
+              
+              #passwordField="ngModel"
+              [(ngModel)]="password"
+
+              type="password"
+              name="password"
+              class="form-control"
+              id="password"
+              placeholder="Password"
+              [class.is-invalid]="passwordField.dirty && passwordField.invalid"
+              required
+            
+              autocomplete="off"
+            />
+           
+            @if (passwordField.dirty && passwordField.hasError("required")) {
+              <div data-testid="error-password-required"  class="moninvalid-tooltip">Password is required.</div>
+            }
+
+       
+
+           
+
+
+  <!-- 
+              <input
+                #passwordField="ngModel"
+                [(ngModel)]="password"
+                type="password"
+                name="password"
+                class="form-control"
+                id="password"
+                [class.is-invalid]="passwordField.dirty && passwordField.invalid"
+                required
+              />
+  
+              @if (passwordField.dirty && passwordField.hasError("required")) {
+                <div class="moninvalid-tooltip">Le password est obligatoire</div>
+              } -->
+            </div>
+  
+            <div class="col-sm-6 mx-auto ">
+                <div class="wrapper mt-5 offset-sm-2 mx-auto">
+                 <!--  <button
+                    type="submit"
+                    class="btn btn-primary col-sm-3 w-100"
+                    [disabled]="signupForm.invalid || !isPasswordMatchValid()"
+                  >
+                    S'inscrire
+                  </button> -->
+                  <button
+                  data-testid="submit-button"
+                  type="submit"
+                  class="btn btn-primary col-sm-3 w-100 mt-4"
+                 
+                >
+                  Se Connecter
+                </button>
+                </div>
+              </div>
+            
+              <div class="col-sm-6 mx-auto">
+                <div class="monloginSignUpSeparator mb-5">
+                    <span class="montextInSeparator">ou</span>
+                </div>
+                <button
+                
+                class="btn btn-outline-dark col-sm-3 w-100"
+               
+              >
+                Ouvrir un compte
+              </button>
+              </div>
+          </div>
+        </div>
+      </fieldset>
+   
+        </form>
+    </div>
+    <div class="col col-lg-3">
+        
+      </div>
+
+            </div>
+  </div>
+  <h3>Toutes les donnees: {{ donnee() }}</h3>
+  
+  <p>register works!</p>
+  
