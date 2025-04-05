@@ -6,7 +6,7 @@ import { environment } from "../../../environments/environment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { User } from '../entity/user.interface';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class UserFirebaseService implements UserService {
     readonly #http = inject(HttpClient);
     readonly #FIRESTORE_API_URL=`https://firestore.googleapis.com/v1/projects/${environment.firebaseConfig.projectId}/databases/(default)/documents`; 

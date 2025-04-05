@@ -34,7 +34,9 @@ interface FirebaseResponseSignin {
   expiresIn: string;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthenticationFirebaseService implements AuthenticationService {
   readonly #http = inject(HttpClient);
 
