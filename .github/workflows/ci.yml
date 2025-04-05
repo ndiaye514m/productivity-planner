@@ -40,7 +40,7 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      #Set environment variables
+      #Set environment variables quote
       - name: Create environment file
         run: |
           mkdir src/environments
