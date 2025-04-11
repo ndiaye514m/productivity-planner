@@ -9,6 +9,15 @@ export interface RegisterResponse {
   userId: string;
 }
 
+//type Result<T,E>= {type:'ok',value: T} | {type:'error',error:E};
+//export type Result<Response,Error>= {type:'ok',value: Response} | {type:'error',error:Error};
+export class EmailAlreadyTakenError extends Error{
+  constructor(readonly email: string) {
+    super(`Email ${email} is already taken. Please try another email.`);
+    this.name = 'EmailAlreadyTakenError';
+  }
+}
+
 export interface LoginResponseSignin {
   jwtToken: string;
   jwtRefreshToken: string;
@@ -26,7 +35,7 @@ export abstract class AuthenticationService {
   abstract register(
     email: string,
     password: string,
-  ): Observable<RegisterResponse>;
+  ): Observable<RegisterResponse|EmailAlreadyTakenError>;
 
   abstract login(
     email: string,

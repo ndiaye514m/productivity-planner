@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+/*import { inject, Injectable } from '@angular/core';
 import { User, Visitor } from '../entity/user.interface';
 import { AuthenticationService } from '../port/authentication.service';
 import { firstValueFrom } from 'rxjs';
@@ -40,7 +40,7 @@ export class RegisterUserUseCaseService {
   }
   
   
-}
+}*/
 /*
  jwtToken: string;
   jwtRefreshToken: string;

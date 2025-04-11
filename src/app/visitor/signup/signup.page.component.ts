@@ -1,8 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import {FormsModule } from '@angular/forms';
-import { AuthenticationService } from '../../core/port/authentication.service';
+import { AuthenticationService, EmailAlreadyTakenError } from '../../core/port/authentication.service';
 import { UserStore } from '../../core/store/user.store';
 import { Visitor } from '../../core/entity/user.interface';
+
+import { Router } from '@angular/router';
+import { RegisterUserUseCaseService } from './register-user.use-case.service';
 
 @Component({
   imports: [FormsModule],
@@ -15,6 +18,10 @@ export class SignupPageComponent {
   
   submitted?: boolean = false;
   readonly store=inject(UserStore);
+  readonly authenticationService = inject(AuthenticationService);
+
+  readonly #registerUserUseCase = inject(RegisterUserUseCaseService);
+  readonly #router=inject(Router);
   /*this.store.email()
   this.store.username()
   this.store.register(email,password)*/
@@ -23,7 +30,9 @@ export class SignupPageComponent {
   readonly password = signal('');*/
 
 
-  readonly authenticationService = inject(AuthenticationService);
+ 
+
+
   readonly name = signal('');
   readonly email = signal('');
   readonly password = signal('');
@@ -37,16 +46,9 @@ export class SignupPageComponent {
     () =>
       `${this.name()} ${this.email()} ${this.password()} ${this.confirmPassword()}`,
   );
-  onSaveProduct() {
-    console.log('save a product..');
-    this.submitted = true;
-    /*if(this.productFormGroup?.invalid) return
-    this.productsService.saveProduct(this.productFormGroup?.value)
-    .subscribe(data=>{
-      alert("Success Saving Product");
-  
-    });*/
-  }
+  readonly submitbutton = document.getElementById('{submit-button-id}') as HTMLButtonElement;
+
+  readonly emailAlreadyTakenErrorMessage=signal('');
 
   onSubmit() {
     console.log('Form submitted');
@@ -60,6 +62,18 @@ export class SignupPageComponent {
         email: this.email(),
         password:this.password(),
       }
-      this.store.register(visitor);
+      //this.store.register(visitor);
+
+      this.#registerUserUseCase.execute(visitor)
+      .then(() => this.#router.navigate(['/app/dashboard']))
+      .catch(error=> {
+        if(error instanceof EmailAlreadyTakenError)
+        {
+          console.log('EmailAlreadyTaken should be displayed');
+          this.emailAlreadyTakenErrorMessage.set(error.message+' is already taken, please try another email.');
+          this.submitbutton.disabled = true;
+        }
+      } );
+      console.log('End of function');
   }
 }

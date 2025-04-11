@@ -2,9 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 //import { environment } from '../../../environments/environment';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import {
   AuthenticationService,
+  EmailAlreadyTakenError,
   LoginResponseSignin,
   RegisterResponse,
 } from '../port/authentication.service';
@@ -40,7 +41,7 @@ interface FirebaseResponseSignin {
 export class AuthenticationFirebaseService implements AuthenticationService {
   readonly #http = inject(HttpClient);
 
-  register(email: string, password: string): Observable<RegisterResponse> {
+  register(email: string, password: string): Observable<RegisterResponse|EmailAlreadyTakenError> {
     console.log('Firebase register method called');
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseConfig.apiKey}`;
 
@@ -51,11 +52,21 @@ export class AuthenticationFirebaseService implements AuthenticationService {
     };
     return this.#http.post<FirebaseResponseSignup>(url, body).pipe(
       map((response) => ({
-        jwtToken: response.idToken,
-        jwtRefreshToken: response.refreshToken,
-        expiresIn: response.expiresIn,
-        userId: response.localId,
+               jwtToken: response.idToken,
+          jwtRefreshToken: response.refreshToken,
+          expiresIn: response.expiresIn,
+          userId: response.localId,
+        
+       
       })),
+      catchError(error => {
+        if(error.error.error.message === 'EMAIL_EXISTS')
+         {
+          return of( new EmailAlreadyTakenError(email));
+        
+          }
+          throw error;
+        })
     );
   }
 

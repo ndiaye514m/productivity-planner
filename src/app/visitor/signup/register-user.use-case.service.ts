@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { User, Visitor } from 'src/app/core/entity/user.interface';
-import { AuthenticationService } from 'src/app/core/port/authentication.service';
+import { AuthenticationService, EmailAlreadyTakenError } from 'src/app/core/port/authentication.service';
 import { UserService } from 'src/app/core/port/user.service';
+import { UserStore } from 'src/app/core/store/user.store';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class RegisterUserUseCaseService {
 
   readonly #authenticationService=inject(AuthenticationService);
   readonly #userService=inject(UserService);
+  readonly #userStore=inject(UserStore);
 
   async execute(visitor: Visitor): Promise<User|Error>{
     // 1. Auhthenticate new visitor
@@ -19,7 +21,12 @@ export class RegisterUserUseCaseService {
     const password=visitor.password;
 
     const authResponse=await firstValueFrom(this.#authenticationService.register(email,password));
-    
+    console.log(authResponse);
+
+    if(authResponse instanceof EmailAlreadyTakenError)
+    {
+      throw authResponse;
+    } 
     // 2. Add credentials information in session storage
     const jwtToken=authResponse.jwtToken;
     const id=authResponse.userId;
@@ -37,6 +44,9 @@ export class RegisterUserUseCaseService {
 
     await firstValueFrom( this.#userService.create(user,jwtToken));
 
+
+    // 4. Add user in app Store
+    this.#userStore.register(user);
     return user;
   };
 }

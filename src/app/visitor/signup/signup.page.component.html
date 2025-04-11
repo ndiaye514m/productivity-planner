@@ -79,6 +79,11 @@
               <!-- <div class="form-text text-danger">Email is required.</div>-->
               <div data-testid="error-email-pattern" class="moninvalid-tooltip">Email must be valid.</div>
             }
+            @else if (
+              emailAlreadyTakenErrorMessage() !== ''
+            ) {
+              <div data-testid="error-email-already-taken" class="moninvalid-tooltip">{{emailAlreadyTakenErrorMessage()}}</div>
+            }
           </div>
 
           <div class="col-sm-4 mx-auto">
@@ -152,10 +157,11 @@
               <div data-testid="error-confirm-password-match" class="moninvalid-tooltip">Passwords do not match.</div>
             }
           </div>
+        
 
           <div class="col-sm-3 mx-auto">
             <div class="wrapper mt-5 offset-sm-2 mx-auto">
-              <button
+              <button id="submit-button-id"
               data-testid="submit-button"
                 type="submit"
                 class="btn btn-primary col-sm-3 w-100"
