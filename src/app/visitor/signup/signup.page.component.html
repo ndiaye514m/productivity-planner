@@ -79,10 +79,8 @@
               <!-- <div class="form-text text-danger">Email is required.</div>-->
               <div data-testid="error-email-pattern" class="moninvalid-tooltip">Email must be valid.</div>
             }
-            @else if (
-              emailAlreadyTakenErrorMessage() !== ''
-            ) {
-              <div data-testid="error-email-already-taken" class="moninvalid-tooltip">{{emailAlreadyTakenErrorMessage()}}</div>
+            @else if (isEmailAlreadyTaken()) {
+              <div data-testid="error-email-already-taken" class="moninvalid-tooltip">{{ emailAlreadyTakenError()?.message }}</div>
             }
           </div>
 
@@ -165,7 +163,7 @@
               data-testid="submit-button"
                 type="submit"
                 class="btn btn-primary col-sm-3 w-100"
-                [disabled]="signupForm.invalid || !isPasswordMatchValid()"
+                [disabled]="signupForm.invalid || !isPasswordMatchValid() || isEmailAlreadyTaken() || isLoading()"
               >
                 S'inscrire
               </button>

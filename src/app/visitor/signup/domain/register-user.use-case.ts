@@ -1,4 +1,5 @@
 import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { User, Visitor } from 'src/app/core/entity/user.interface';
 import { AuthenticationService, EmailAlreadyTakenError } from 'src/app/core/port/authentication.service';
@@ -8,28 +9,29 @@ import { UserStore } from 'src/app/core/store/user.store';
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterUserUseCaseService {
+export class RegisterUserUseCase {
 
   readonly #authenticationService=inject(AuthenticationService);
   readonly #userService=inject(UserService);
   readonly #userStore=inject(UserStore);
+  readonly #router = inject(Router);
 
-  async execute(visitor: Visitor): Promise<User|Error>{
+  async execute(visitor: Visitor): Promise<void>{
     // 1. Auhthenticate new visitor
     const name = visitor.name;
     const email=visitor.email;
     const password=visitor.password;
 
-    const authResponse=await firstValueFrom(this.#authenticationService.register(email,password));
-    console.log(authResponse);
+    const registerResponse=await firstValueFrom(this.#authenticationService.register(email,password));
+    console.log(registerResponse);
 
-    if(authResponse instanceof EmailAlreadyTakenError)
+    if(registerResponse instanceof EmailAlreadyTakenError)
     {
-      throw authResponse;
+      throw registerResponse;
     } 
     // 2. Add credentials information in session storage
-    const jwtToken=authResponse.jwtToken;
-    const id=authResponse.userId;
+    const jwtToken=registerResponse.jwtToken;
+    const id=registerResponse.userId;
 
     
     localStorage.setItem('jwtToken',jwtToken);
@@ -47,6 +49,9 @@ export class RegisterUserUseCaseService {
 
     // 4. Add user in app Store
     this.#userStore.register(user);
-    return user;
+
+    // 5. Redirect user to dashboard
+    this.#router.navigate(['/app/dashboard']);
+
   };
 }

@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationFirebaseService } from '../adapter/authentication-firebase.service';
 
-export interface RegisterResponse {
+export type RegisterResponse = RegisterPayload | EmailAlreadyTakenError;
+export type LoginResponse = LoginPayload;
+
+interface RegisterPayload {
   jwtToken: string;
   jwtRefreshToken: string;
   expiresIn: string;
@@ -18,7 +21,7 @@ export class EmailAlreadyTakenError extends Error{
   }
 }
 
-export interface LoginResponseSignin {
+export interface LoginPayload {
   jwtToken: string;
   jwtRefreshToken: string;
   expiresIn: string;
@@ -40,7 +43,7 @@ export abstract class AuthenticationService {
   abstract login(
     email: string,
     password: string,
-  ): Observable<LoginResponseSignin>;
+  ): Observable<LoginPayload>;
 
   /*save( email: string,userId: string,bearerToken: string): Observable<unknown> {
     const baseUrl = `https://firestore.googleapis.com/v1/projects/${environment.firebaseConfig.projectId}/databases/(default)/documents`;

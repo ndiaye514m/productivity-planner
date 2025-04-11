@@ -2,13 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 //import { environment } from '../../../environments/environment';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 import {
   AuthenticationService,
-  EmailAlreadyTakenError,
-  LoginResponseSignin,
+  LoginResponse,
   RegisterResponse,
 } from '../port/authentication.service';
+import { EmailAlreadyTakenError } from 'src/app/visitor/signup/domain/email-already-taken.error';
 
 //import { environment } from '../../../environments/environment';
 
@@ -41,7 +41,7 @@ interface FirebaseResponseSignin {
 export class AuthenticationFirebaseService implements AuthenticationService {
   readonly #http = inject(HttpClient);
 
-  register(email: string, password: string): Observable<RegisterResponse|EmailAlreadyTakenError> {
+  register(email: string, password: string): Observable<RegisterResponse> {
     console.log('Firebase register method called');
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseConfig.apiKey}`;
 
@@ -65,12 +65,12 @@ export class AuthenticationFirebaseService implements AuthenticationService {
           return of( new EmailAlreadyTakenError(email));
         
           }
-          throw error;
+          return throwError(() => error);
         })
     );
   }
 
-  login(email: string, password: string): Observable<LoginResponseSignin> {
+  login(email: string, password: string): Observable<LoginResponse> {
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseConfig.apiKey}`;
     // const url=`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAfX4A4wx1HUFwJ87VfTbTpM0CtPx9-cnA`;
 

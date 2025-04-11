@@ -1,6 +1,6 @@
 import { inject, Injectable } from "@angular/core";
 import { UserService} from "../port/user.service";
-import { ignoreElements, Observable } from "rxjs";
+import {  map, Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
 //import { environment } from "@env/environment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -31,7 +31,8 @@ export class UserFirebaseService implements UserService {
     const options = { headers: headers };
     // const options = { headers };
 
-    return this.#http.post(url, body, options).pipe(ignoreElements());
+    //return this.#http.post(url, body, options).pipe(ignoreElements());
+    return this.#http.post(url, body, options).pipe(map(()=> undefined));
     // ou return this.#http.post(url, body, options).pipe(map(()=> undefined));
     }
 }

@@ -4,8 +4,8 @@ import { AuthenticationService, EmailAlreadyTakenError } from '../../core/port/a
 import { UserStore } from '../../core/store/user.store';
 import { Visitor } from '../../core/entity/user.interface';
 
-import { Router } from '@angular/router';
-import { RegisterUserUseCaseService } from './register-user.use-case.service';
+
+import { RegisterUserUseCase } from './domain/register-user.use-case';
 
 @Component({
   imports: [FormsModule],
@@ -20,8 +20,8 @@ export class SignupPageComponent {
   readonly store=inject(UserStore);
   readonly authenticationService = inject(AuthenticationService);
 
-  readonly #registerUserUseCase = inject(RegisterUserUseCaseService);
-  readonly #router=inject(Router);
+  readonly #registerUserUseCase = inject(RegisterUserUseCase);
+  readonly isLoading = signal(false);
   /*this.store.email()
   this.store.username()
   this.store.register(email,password)*/
@@ -46,12 +46,14 @@ export class SignupPageComponent {
     () =>
       `${this.name()} ${this.email()} ${this.password()} ${this.confirmPassword()}`,
   );
-  readonly submitbutton = document.getElementById('{submit-button-id}') as HTMLButtonElement;
+ // readonly submitbutton = document.getElementById('{submit-button-id}') as HTMLButtonElement;
 
-  readonly emailAlreadyTakenErrorMessage=signal('');
 
+  readonly emailAlreadyTakenError = signal<EmailAlreadyTakenError|null>(null);
+  readonly isEmailAlreadyTaken = computed(() => this.emailAlreadyTakenError()?.email === this.email());
   onSubmit() {
     console.log('Form submitted');
+    this.isLoading.set(true);
    /* this.authenticationService
       .register(this.email(), this.password())
       .subscribe((response) => {
@@ -65,15 +67,15 @@ export class SignupPageComponent {
       //this.store.register(visitor);
 
       this.#registerUserUseCase.execute(visitor)
-      .then(() => this.#router.navigate(['/app/dashboard']))
       .catch(error=> {
-        if(error instanceof EmailAlreadyTakenError)
-        {
-          console.log('EmailAlreadyTaken should be displayed');
-          this.emailAlreadyTakenErrorMessage.set(error.message+' is already taken, please try another email.');
-          this.submitbutton.disabled = true;
+        console.log('EmailAlreadyTaken should be displayed');
+        this.isLoading.set(false);
+        const isEmailAlreadyTaken = error instanceof EmailAlreadyTakenError;
+
+        if(isEmailAlreadyTaken) {
+         this.emailAlreadyTakenError.set(error);
         }
-      } );
+      });
       console.log('End of function');
   }
 }
