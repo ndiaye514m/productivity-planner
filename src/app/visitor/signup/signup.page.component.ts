@@ -74,6 +74,7 @@ export class SignupPageComponent {
 
         if(isEmailAlreadyTaken) {
          this.emailAlreadyTakenError.set(error);
+         console.log('EmailAlreadyTaken should be set');
         }
       });
       console.log('End of function');
