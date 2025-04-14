@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 //import { environment } from '../../../environments/environment';
@@ -16,7 +16,7 @@ import { EmailAlreadyTakenError } from 'src/app/visitor/signup/domain/email-alre
  *https://firebase.google.com/docs/reference/rest/auth?hl=fr#section-create-email-password
  */
 //export const environment = {};
-interface FirebaseResponseSignup {
+interface FirebaseResponseSignupPayload {
   idToken: string;
   email: string;
   refreshToken: string;
@@ -24,7 +24,7 @@ interface FirebaseResponseSignup {
   localId: string;
 }
 
-interface FirebaseResponseSignin {
+interface FirebaseResponseSigninPayload {
   kind: string;
   localId: string;
   email: string;
@@ -34,6 +34,16 @@ interface FirebaseResponseSignin {
   refreshToken: string;
   expiresIn: string;
 }
+
+export interface FirebaseRefreshTokenPayload {
+  expires_in: string;
+  token_type: string; // always "Bearer"
+  refresh_token: string;
+  id_token: string;
+  user_id: string;
+  project_id: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +60,7 @@ export class AuthenticationFirebaseService implements AuthenticationService {
       password: password,
       returnSecureToken: true,
     };
-    return this.#http.post<FirebaseResponseSignup>(url, body).pipe(
+    return this.#http.post<FirebaseResponseSignupPayload>(url, body).pipe(
       map((response) => ({
                jwtToken: response.idToken,
           jwtRefreshToken: response.refreshToken,
@@ -79,7 +89,7 @@ export class AuthenticationFirebaseService implements AuthenticationService {
       password: password,
       returnSecureToken: true,
     };
-    return this.#http.post<FirebaseResponseSignin>(url, body).pipe(
+    return this.#http.post<FirebaseResponseSigninPayload>(url, body).pipe(
       map((response) => ({
         jwtToken: response.idToken,
         jwtRefreshToken: response.refreshToken,
@@ -111,6 +121,21 @@ export class AuthenticationFirebaseService implements AuthenticationService {
     // const options = { headers };
 
     return this.#http.post(url, body, options);
+  }
+
+
+  refreshToken(refreshToken: string): Observable<{ jwtToken: string, userId: string }> {
+    const url = `https://securetoken.googleapis.com/v1/token?key=${environment.firebaseConfig.apiKey}`;
+    const body = new HttpParams()
+      .set('grant_type', 'refresh_token')
+      .set('refresh_token', refreshToken)
+      .toString();
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+
+    return this.#http.post<FirebaseRefreshTokenPayload>(url, body, { headers }).pipe(
+      map(response => ({ jwtToken: response.id_token, userId: response.user_id })),
+    );
   }
 
   /* getDataForFirestore(user: User) Objet <unknown>

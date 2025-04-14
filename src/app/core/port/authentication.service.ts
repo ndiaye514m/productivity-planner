@@ -38,12 +38,23 @@ export abstract class AuthenticationService {
   abstract register(
     email: string,
     password: string,
-  ): Observable<RegisterResponse|EmailAlreadyTakenError>;
+  //): Observable<RegisterResponse|EmailAlreadyTakenError>;
+): Observable<RegisterResponse>;
 
   abstract login(
     email: string,
     password: string,
-  ): Observable<LoginPayload>;
+  //): Observable<LoginPayload>;
+): Observable<LoginResponse>;
+
+ /**
+ * Retrieves a new JWT token using the provided refresh token.
+ *
+ * @param refreshToken - The refresh token used to obtain a new JWT.
+ * @returns An Observable that emits the new JWT token as a string.
+ */
+ abstract refreshToken(refreshToken: string): Observable<{ jwtToken: string, userId: string }>;
+
 
   /*save( email: string,userId: string,bearerToken: string): Observable<unknown> {
     const baseUrl = `https://firestore.googleapis.com/v1/projects/${environment.firebaseConfig.projectId}/databases/(default)/documents`;
