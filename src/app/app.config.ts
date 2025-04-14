@@ -1,8 +1,12 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
+import { provideRouter, Router } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
+import { UserService } from './core/port/user.service';
+import { UserStore } from './core/store/user.store';
+import { AuthenticationService } from './core/port/authentication.service';
+import { initializeAutoConnectFactory } from './core/initializer/auto-connect.initializer';
 
 
 export const appConfig: ApplicationConfig = {
@@ -10,5 +14,15 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
+    provideAppInitializer(() => {
+      return initializeAutoConnectFactory(
+        inject(AuthenticationService),
+        inject(UserService),
+        inject(UserStore),
+        inject(Router)
+      )();
+    }),
+
+
   ],
 };
