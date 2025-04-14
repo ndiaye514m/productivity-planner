@@ -16,7 +16,7 @@ export abstract class UserService {
     return of(undefined);*/
    
 
-
+    abstract fetch(userId: string, bearerToken: string): Observable<User>;
  /* fetch(id: string) : Observable<User> {
 
   }*/

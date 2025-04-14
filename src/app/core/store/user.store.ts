@@ -25,8 +25,7 @@ export const UserStore = signalStore(
 
     withMethods((store) =>({
     
-       register(user: User): void {
-
+       load(user: User): void {
         
         patchState(store,{user});
         //patch state c le step 6  

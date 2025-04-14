@@ -29,13 +29,22 @@ export class RegisterUserUseCase {
     {
       throw registerResponse;
     } 
-    // 2. Add credentials information in session storage
-    const jwtToken=registerResponse.jwtToken;
+    // 2. Add credentials information in webapp storage
     const id=registerResponse.userId;
+    const jwtToken=registerResponse.jwtToken;
+   
+
+    const jwtRefreshToken=registerResponse.jwtRefreshToken;
+    const expiresIn=registerResponse.expiresIn;
+
+    // ou const { userId: id, jwtToken, jwtRefreshToken, expiresIn } = registerResponse; 
 
     
     localStorage.setItem('jwtToken',jwtToken);
     localStorage.setItem('email',email);
+
+    localStorage.setItem('jwtRefreshToken', jwtRefreshToken); 
+    localStorage.setItem('expiresIn', expiresIn);
 
     // 3. Create new user in database 
     const user:User={
@@ -48,7 +57,7 @@ export class RegisterUserUseCase {
 
 
     // 4. Add user in app Store
-    this.#userStore.register(user);
+    this.#userStore.load(user);
 
     // 5. Redirect user to dashboard
     this.#router.navigate(['/app/dashboard']);
