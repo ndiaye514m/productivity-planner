@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginPageComponent } from './login.page.component';
+import { LoginPageComponent } from '../visitor/login/login.page.component';
 //import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
