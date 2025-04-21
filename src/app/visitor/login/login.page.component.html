@@ -13,7 +13,7 @@
                 
               </div>
               <div class="col">
-        <form (ngSubmit)="onSubmit()" #signupForm="ngForm" autocomplete="off">
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm" autocomplete="off">
             
         <fieldset class="border p-2">
         <legend class="float-none w-auto p-2">Déjà Membre</legend>
@@ -29,19 +29,7 @@
             <div class="col-sm-6 position-relative mx-auto mb-5">
               <!--position relative pour tooltip-->
   
-              <!-- <input
-                #emailField="ngModel"
-                [(ngModel)]="email"
-                type="email"
-                name="email"
-                class="form-control"
-                id="email"
-                autocomplete="email"
-                pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-                [class.is-invalid]="emailField.dirty && emailField.invalid"
-                required
-              />
-   -->
+
                 <input
                 data-testid="email"
                 #emailField="ngModel"
@@ -68,30 +56,10 @@
                   
                   <div data-testid="error-email-pattern" class="moninvalid-tooltip">Email must be valid.</div>
                 }
-                <!-- ou  @else if (emailField.dirty && emailField.hasError("email")) { --> 
-
-
-              <!-- @if (emailField.dirty && emailField.hasError("required")) { -->
-                <!-- <div class="form-text text-danger">Email is required.</div>-->
-              <!--   <div class="moninvalid-tooltip">L'E-mail est obligatoire</div>
-              } @else if (emailField.dirty && emailField.hasError("email")) { -->
-                <!-- <div class="form-text text-danger">Email is required.</div>-->
-              <!--   <div class="moninvalid-tooltip">
-                  Veuillez entrer une adresse email valide
-                </div>
-              } @else if (emailField.dirty && emailField.hasError("pattern")) { -->
-                <!-- <div class="form-text text-danger">Email is required.</div>-->
-               <!--  <div class="moninvalid-tooltip">
-                  Votre devez saisir une bonne adresse mail
-                </div>
-              } -->
+          
             </div>
   
-          <!--   <div class="col-sm-5 mx-auto">
-              <label for="password" class="col-form-label fw-bold"
-                >Mot de passe</label
-              >
-            </div> -->
+        
             <div class="col-sm-6 position-relative mx-auto mb-3">
               <!--position relative pour tooltip-->
               <input
@@ -120,21 +88,6 @@
            
 
 
-  <!-- 
-              <input
-                #passwordField="ngModel"
-                [(ngModel)]="password"
-                type="password"
-                name="password"
-                class="form-control"
-                id="password"
-                [class.is-invalid]="passwordField.dirty && passwordField.invalid"
-                required
-              />
-  
-              @if (passwordField.dirty && passwordField.hasError("required")) {
-                <div class="moninvalid-tooltip">Le password est obligatoire</div>
-              } -->
             </div>
   
             <div class="col-sm-6 mx-auto ">
@@ -150,7 +103,8 @@
                   data-testid="submit-button"
                   type="submit"
                   class="btn btn-primary col-sm-3 w-100 mt-4"
-                 
+                  
+                  [disabled]="loginForm.invalid"
                 >
                   Se Connecter
                 </button>

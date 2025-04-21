@@ -3,6 +3,8 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LoginUserUseCase } from './domain/login-user.use-case';
 import { InvalidCredentialError } from './domain/invalid-credential.error';
+import { UserEmailNotFoundError } from './domain/user-email-not-found.error';
+import { InvalidPasswordError } from './domain/invalid-password.error';
 
 @Component({
   imports: [FormsModule],
@@ -16,6 +18,9 @@ export class LoginPageComponent {
   readonly password = signal('');
   readonly #loginUserUseCase = inject(LoginUserUseCase);
   readonly invalidCredentialError = signal<InvalidCredentialError|null>(null);
+  readonly userEmailNotFoundError = signal<UserEmailNotFoundError|null>(null);
+  readonly invalidPasswordError = signal<InvalidPasswordError|null>(null);
+
 
 
 
@@ -28,9 +33,15 @@ export class LoginPageComponent {
     console.log('Form submitted');
     console.log(this.email()+" "+this.password());
     this.#loginUserUseCase.execute(this.email(), this.password()).catch(error => {
-      if(error instanceof InvalidCredentialError) {
-        this.invalidCredentialError.set(error);
+      if(error instanceof UserEmailNotFoundError) {
+        this.userEmailNotFoundError.set(error);
       }
+
+      if(error instanceof InvalidPasswordError) {
+        this.invalidPasswordError.set(error);
+      }
+
+
     })
    /* this.authenticationService
       .register(this.email(), this.password())
