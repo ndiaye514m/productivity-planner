@@ -83,7 +83,9 @@
               <div data-testid="error-password-required"  class="moninvalid-tooltip">Password is required.</div>
             }
 
-       
+            @else if (invalidCredentialError()) {
+              <div data-testid="error-password-required"  class="moninvalid-tooltip">{{ invalidCredentialError()?.message }}</div>
+            }
 
            
 

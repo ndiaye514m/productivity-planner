@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationFirebaseService } from '../adapter/authentication-firebase.service';
+import { InvalidCredentialError } from '@app/visitor/login/domain/invalid-credential.error';
 
 export type RegisterResponse = RegisterPayload | EmailAlreadyTakenError;
-export type LoginResponse = LoginPayload;
+
+export type LoginResponse = LoginPayload | InvalidCredentialError;
 
 interface RegisterPayload {
   jwtToken: string;

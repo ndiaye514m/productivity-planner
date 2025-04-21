@@ -9,6 +9,7 @@ import {
   RegisterResponse,
 } from '../port/authentication.service';
 import { EmailAlreadyTakenError } from 'src/app/visitor/signup/domain/email-already-taken.error';
+import { InvalidCredentialError } from '@app/visitor/login/domain/invalid-credential.error';
 
 //import { environment } from '../../../environments/environment';
 
@@ -97,6 +98,14 @@ export class AuthenticationFirebaseService implements AuthenticationService {
         userId: response.localId,
         isRegistered: response.registered,
       })),
+      catchError(error => {
+
+          if(error.error.error.message === 'INVALID_LOGIN_CREDENTIALS') {
+            return of(new InvalidCredentialError());
+          }
+
+        return throwError(() => error);
+      })
     );
   }
 
