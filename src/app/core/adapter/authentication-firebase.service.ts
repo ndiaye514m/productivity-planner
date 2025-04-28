@@ -7,8 +7,8 @@ import {
   AuthenticationService,
   LoginResponse,
   RegisterResponse,
-} from '../port/authentication.service';
-import { EmailAlreadyTakenError } from 'src/app/visitor/signup/domain/email-already-taken.error';
+} from '@app/core/port/authentication.service';
+import { EmailAlreadyTakenError } from '@app/visitor/signup/domain/email-already-taken.error';
 import { InvalidCredentialError } from '@app/visitor/login/domain/invalid-credential.error';
 
 //import { environment } from '../../../environments/environment';

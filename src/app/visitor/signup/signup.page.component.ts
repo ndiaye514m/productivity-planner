@@ -1,17 +1,19 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import {FormsModule } from '@angular/forms';
-import { AuthenticationService, EmailAlreadyTakenError } from '../../core/port/authentication.service';
-import { UserStore } from '../../core/store/user.store';
-import { Visitor } from '../../core/entity/user.interface';
+import { AuthenticationService, EmailAlreadyTakenError } from '@app/core/port/authentication.service';
+import { UserStore } from '@app/core/store/user.store';
+import { Visitor } from '@app/core/entity/user.interface';
 
 
-import { RegisterUserUseCase } from './domain/register-user.use-case';
+import { RegisterUserUseCase } from '@app/visitor/signup/domain/register-user.use-case';
+
 
 @Component({
   imports: [FormsModule],
+  //imports: [FormsModule,HttpClientModule],
   templateUrl: './signup.page.component.html',
   styleUrl: './signup.page.component.scss',
-  //si on voulait provide le au niveau component on aurait fait
+  //si on voulait provide  au niveau component on aurait fait
   //providersUser:[UserStore]
 })
 export class SignupPageComponent {
@@ -52,7 +54,7 @@ export class SignupPageComponent {
   readonly emailAlreadyTakenError = signal<EmailAlreadyTakenError|null>(null);
   readonly isEmailAlreadyTaken = computed(() => this.emailAlreadyTakenError()?.email === this.email());
   onSubmit() {
-    console.log('Form submitted');
+    //console.log('Form submitted');
     this.isLoading.set(true);
    /* this.authenticationService
       .register(this.email(), this.password())
@@ -68,15 +70,15 @@ export class SignupPageComponent {
 
       this.#registerUserUseCase.execute(visitor)
       .catch(error=> {
-        console.log('EmailAlreadyTaken should be displayed');
+        //console.log('EmailAlreadyTaken should be displayed');
         this.isLoading.set(false);
         const isEmailAlreadyTaken = error instanceof EmailAlreadyTakenError;
 
         if(isEmailAlreadyTaken) {
          this.emailAlreadyTakenError.set(error);
-         console.log('EmailAlreadyTaken should be set');
+         //console.log('EmailAlreadyTaken should be set');
         }
       });
-      console.log('End of function');
+      //console.log('End of function');
   }
 }

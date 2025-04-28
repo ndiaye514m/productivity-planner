@@ -1,10 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SignupPageComponent } from '@app/visitor/signup/signup.page.component';
+//import { UserStore } from '@app/core/store/user.store';
 
-import { SignupPageComponent } from './signup.page.component';
-import { UserStore } from '../../core/store/user.store';
-import { AuthenticationService } from '../../core/port/authentication.service';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { RegisterUserUseCase } from '@app/visitor/signup/domain/register-user.use-case';
+import { AuthenticationService } from '@app/core/port/authentication.service';
+import { UserService } from '@app/core/port/user.service';
+import { UserStore } from '@app/core/store/user.store';
+import { Router } from '@angular/router';
+import { of } from 'rxjs';
 
 
 
@@ -12,47 +17,88 @@ describe('SignupPageComponent', () => {
   let component: SignupPageComponent;
   let fixture: ComponentFixture<SignupPageComponent>;
 
-
+  let registerUseCase: RegisterUserUseCase;
   let name: DebugElement;
   let email: DebugElement;
   let password: DebugElement;
   let confirmPassword: DebugElement;
   let button: DebugElement;
 
+  //phase login
+ // let authenticationService: AuthenticationService;
+ let authenticationService: AuthenticationService;
+ let userService: UserService;
+  let userStore: UserStore;
+  let router: Router;
+  const mockUserId = '123';
+  const mockJwtToken = 'jwt-token';
+  const mockJwtRefreshToken = 'refresh-token';
+  const mockExpiresIn = '3600';
+  const mockUser = { id: mockUserId, name: 'John Doe' };
+
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SignupPageComponent],//i added
       //providers: [provideRouter([])],
       providers:[
-        { provide: UserStore, useValue: {} },
-        { provide: AuthenticationService, useValue: {} },
+        //{ provide: UserStore, useValue: {} },
+       /* { provide: RegisterUserUseCase, useValue: {execute: jest.fn() } },
+        { provide: AuthenticationService, useValue: { register: jest.fn() }},
+        { provide: UserService, useValue: { create: jest.fn( ) }},
+        { provide: UserStore, useValue: { register: jest.fn() }},
+        { provide: Router, useValue: { navigate: jest.fn() }}*/
+        RegisterUserUseCase,
+        { 
+          provide: AuthenticationService, 
+          useValue: { 
+            login: jest.fn().mockReturnValue(of({
+              userId: mockUserId,
+              jwtToken: mockJwtToken,
+              jwtRefreshToken: mockJwtRefreshToken,
+              expiresIn: mockExpiresIn,
+            }))
+          }
+        },
+        { provide: UserService, useValue: { fetch: jest.fn().mockReturnValue(of(mockUser)) }},
+        { provide: UserStore, useValue: { load: jest.fn() }},
+        { provide: Router, useValue: { navigate: jest.fn() }}
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SignupPageComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture.detectChanges(); 
 
+    registerUseCase = TestBed.inject(RegisterUserUseCase);
     name = fixture.debugElement.query(By.css('[data-testid="name"]'));
     email = fixture.debugElement.query(By.css('[data-testid="email"]'));
     password = fixture.debugElement.query(By.css('[data-testid="password"]'));
     confirmPassword = fixture.debugElement.query(By.css('[data-testid="confirm-password"]'));
     button = fixture.debugElement.query(By.css('[data-testid="submit-button"]'));
 
+    //phase2
+    registerUseCase = TestBed.inject(RegisterUserUseCase);
+    authenticationService = TestBed.inject(AuthenticationService);
+    userService = TestBed.inject(UserService);
+    userStore = TestBed.inject(UserStore);
+    router = TestBed.inject(Router);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    // expect(component).toBeDefined();
+
   });
 
   describe('when page load', () => {
-    it('should diplay fields name, email, password and confirm password', () => {
+    it('should display fields name, email, password and confirm password', () => {
       expect(name).toBeTruthy();
       expect(email).toBeTruthy();
       expect(password).toBeTruthy();
       expect(confirmPassword).toBeTruthy();
     });
-    it('should diplay a submit button', () => {
+    it('should display a submit button', () => {
       expect(button).toBeTruthy();
     });
   })
@@ -217,6 +263,7 @@ describe('SignupPageComponent', () => {
   });
 
 
+  
 
   /*describe('when user submit the form', () => {
     it('should register the user with form values', () => {
@@ -242,7 +289,58 @@ describe('SignupPageComponent', () => {
         password: 'Abc1$def'
       });
     });
-  });à revoir*/
+  });à revoir------------------------------------*/
+
+
+  describe('when user submit a valid signup form', () => {
+    it('should call register use case with correct visitor informations', () => {
+      // Arrange
+      name.nativeElement.value = 'John';
+      name.nativeElement.dispatchEvent(new Event('input'));
+      email.nativeElement.value = 'john.doe@acme.com';
+      email.nativeElement.dispatchEvent(new Event('input'));
+      password.nativeElement.value = 'Azerty!!!1';
+      password.nativeElement.dispatchEvent(new Event('input'));
+      confirmPassword.nativeElement.value = 'Azerty!!!1';
+      confirmPassword.nativeElement.dispatchEvent(new Event('input'));
+      fixture.detectChanges();
+
+      // Act
+      button.nativeElement.click();
+      fixture.detectChanges();
+    
+      // Assert
+      expect(registerUseCase.execute).toHaveBeenCalledTimes(1);
+      expect(registerUseCase.execute).toHaveBeenCalledWith({
+        name: 'John',
+        email: 'john.doe@acme.com',
+        password: 'Azerty!!!1',
+      });
+    });
+  });
+
+
+
+  describe('when user submit an invalid signup form', () => {
+    it('should not call register use case', () => {
+      // Arrange
+      email.nativeElement.value = 'invlid-email';
+      email.nativeElement.dispatchEvent(new Event('input'));
+      fixture.detectChanges();
+
+      // Act
+      button.nativeElement.click();
+      fixture.detectChanges();
+    
+      // Assert
+      expect(registerUseCase.execute).not.toHaveBeenCalled();
+    });
+  });
+
+
+
+
+
 
 });
 

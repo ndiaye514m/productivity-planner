@@ -3,17 +3,24 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginPageComponent } from './login.page.component';
 //import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { LoginUserUseCase } from './domain/login-user.use-case';
+import { DebugElement } from '@angular/core';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
+  let email: DebugElement;
+  let password: DebugElement;
 
   /*let email: DebugElement;
   let password: DebugElement;*/
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginPageComponent]
+      imports: [LoginPageComponent],
+      providers: [
+        { provide: LoginUserUseCase, useValue: {execute: jest.fn( )} }
+      ]
     })
     .compileComponents();
 
@@ -21,6 +28,8 @@ describe('LoginPageComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
+    email = fixture.debugElement.query(By.css('[data-testid="email"]'));
+    password = fixture.debugElement.query(By.css('[data-testid="password"]'));
     
   });
 
@@ -109,6 +118,17 @@ describe('LoginPageComponent', () => {
         //Assert
         expect(errorMessage).toContain('Password is required.');
       });
+
+      it('should hide error message when field is valid', () => {
+        // Act
+        password.nativeElement.value = 'password-1234';
+        password.nativeElement.dispatchEvent(new Event('input'));
+        fixture.detectChanges();
+        const error = fixture.debugElement.query(By.css('[data-testid="error-password-required"]'));
+        // Assert
+        expect(error).toBeNull();
+      });
+
     }); 
   
 

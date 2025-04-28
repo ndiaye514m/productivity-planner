@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 
 
-import { AuthenticationService } from 'src/app/core/port/authentication.service';
-import { UserService } from 'src/app/core/port/user.service';
-import { UserStore } from 'src/app/core/store/user.store';
+import { AuthenticationService } from '@app/core/port/authentication.service';
+import { UserService } from '@app/core/port/user.service';
+import { UserStore } from '@app/core/store/user.store';
 import { Router } from '@angular/router';
-import { RegisterUserUseCase } from './register-user.use-case';
+import { RegisterUserUseCase } from '@app/visitor/signup/domain/register-user.use-case';
 
 
 

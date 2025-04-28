@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { User, Visitor } from 'src/app/core/entity/user.interface';
-import { AuthenticationService, EmailAlreadyTakenError } from 'src/app/core/port/authentication.service';
-import { UserService } from 'src/app/core/port/user.service';
-import { UserStore } from 'src/app/core/store/user.store';
+import { User, Visitor } from '@app/core/entity/user.interface';
+import { AuthenticationService, EmailAlreadyTakenError } from '@app/core/port/authentication.service';
+import { UserService } from '@app/core/port/user.service';
+import { UserStore } from '@app/core/store/user.store';
 
 @Injectable({
   providedIn: 'root'
