@@ -10,6 +10,7 @@ import { UserService } from '@app/core/port/user.service';
 import { UserStore } from '@app/core/store/user.store';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
+import { EmailAlreadyTakenError } from './domain/email-already-taken.error';
 
 
 
@@ -26,10 +27,10 @@ describe('SignupPageComponent', () => {
 
   //phase login
  // let authenticationService: AuthenticationService;
- let authenticationService: AuthenticationService;
- let userService: UserService;
-  let userStore: UserStore;
-  let router: Router;
+ //let authenticationService: AuthenticationService;
+ //let userService: UserService;
+  //let userStore: UserStore;
+  //let router: Router;
   const mockUserId = '123';
   const mockJwtToken = 'jwt-token';
   const mockJwtRefreshToken = 'refresh-token';
@@ -48,7 +49,13 @@ describe('SignupPageComponent', () => {
         { provide: UserService, useValue: { create: jest.fn( ) }},
         { provide: UserStore, useValue: { register: jest.fn() }},
         { provide: Router, useValue: { navigate: jest.fn() }}*/
-        RegisterUserUseCase,
+       // RegisterUserUseCase,
+       { 
+        provide: RegisterUserUseCase, 
+        useValue: { 
+          execute: jest.fn().mockRejectedValue(new EmailAlreadyTakenError('mock@email'))
+        }
+      },
         { 
           provide: AuthenticationService, 
           useValue: { 
@@ -79,10 +86,10 @@ describe('SignupPageComponent', () => {
 
     //phase2
     registerUseCase = TestBed.inject(RegisterUserUseCase);
-    authenticationService = TestBed.inject(AuthenticationService);
-    userService = TestBed.inject(UserService);
-    userStore = TestBed.inject(UserStore);
-    router = TestBed.inject(Router);
+   // authenticationService = TestBed.inject(AuthenticationService);
+    //userService = TestBed.inject(UserService);
+    //userStore = TestBed.inject(UserStore);
+    //router = TestBed.inject(Router);
   });
 
   it('should create', () => {
@@ -265,7 +272,7 @@ describe('SignupPageComponent', () => {
 
   
 
-  /*describe('when user submit the form', () => {
+ /* describe('when user submit the form', () => {
     it('should register the user with form values', () => {
       const userStore = TestBed.inject(UserStore);
      
@@ -324,7 +331,7 @@ describe('SignupPageComponent', () => {
   describe('when user submit an invalid signup form', () => {
     it('should not call register use case', () => {
       // Arrange
-      email.nativeElement.value = 'invlid-email';
+      email.nativeElement.value = 'invalid-email';
       email.nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
 

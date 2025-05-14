@@ -9,7 +9,7 @@ import { DebugElement } from '@angular/core';
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
-  let email: DebugElement;
+ //let email: DebugElement;
   let password: DebugElement;
 
   /*let email: DebugElement;
@@ -28,7 +28,7 @@ describe('LoginPageComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    email = fixture.debugElement.query(By.css('[data-testid="email"]'));
+   // email = fixture.debugElement.query(By.css('[data-testid="email"]'));
     password = fixture.debugElement.query(By.css('[data-testid="password"]'));
     
   });
@@ -47,6 +47,8 @@ describe('LoginPageComponent', () => {
       //Assert
       expect(email).toBeTruthy();
     });
+
+  
 
     it('should display password field',()=>{
 
