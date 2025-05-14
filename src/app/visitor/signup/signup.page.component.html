@@ -1,0 +1,181 @@
+<div class="container">
+  <div class="row mt-2" style="height: 35px">
+    <div style="color: green">
+      <h1 class="text-center">INSCRIPTION</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-0">
+  <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+    <fieldset class="border p-2">
+      <legend class="float-none w-auto p-2">Nouveau Membre</legend>
+      <div class="row justify-content-center">
+        <div class="mb-3">
+          <div class="col-sm-4 mx-auto">
+            <label for="name" class="col-form-label fw-bold">Nom</label>
+          </div>
+          <div class="col-sm-4 position-relative mx-auto mb-4">
+            <!--position relative pour tooltip-->
+
+            <input
+              data-testid="name"
+              #nameField="ngModel"
+              [(ngModel)]="name"
+              type="text"
+              name="name"
+              class="form-control"
+              id="name"
+              minlength="3"
+              maxlength="20"
+              pattern="[a-zA-Z ]+"
+              [class.is-invalid]="nameField.dirty && nameField.invalid"
+              required
+            />
+
+            @if (nameField.dirty && nameField.hasError("required")) {
+              <!--<div class="form-text text-danger">Name is required.</div>-->
+              <div data-testid="error-name-required" class="moninvalid-tooltip">Name is required.</div>
+            }
+            @if (nameField.dirty && nameField.hasError("pattern")) {
+              <!--<div class="form-text text-danger">Name is required.</div>-->
+              <div data-testid="error-name-pattern" class="moninvalid-tooltip">Name must contain only letters.</div>
+            }
+            @if (nameField.dirty && nameField.hasError("minlength")) {
+              <!--<div class="form-text text-danger">Name is required.</div>-->
+              <div data-testid="error-name-minlength" class="moninvalid-tooltip">Name must contain at least 3 caracters.</div>
+            }
+            @if (nameField.dirty && nameField.hasError("maxlength")) {
+              <!--<div class="form-text text-danger">Name is required.</div>-->
+              <div data-testid="error-name-maxlength" class="moninvalid-tooltip">Name must contain maximum 20 caracters.</div>
+            }
+          </div>
+          <div class="col-sm-4 mx-auto">
+            <label for="email" class="form-label col-form-label fw-bold"
+              >E-mail</label
+            >
+          </div>
+          <div class="col-sm-4 position-relative mx-auto mb-4">
+            <!--position relative pour tooltip-->
+
+            <input
+              data-testid="email"
+              #emailField="ngModel"
+              [(ngModel)]="email"
+              type="email"
+              name="email"
+              class="form-control"
+              id="email"
+              autocomplete="email"
+              pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+              [class.is-invalid]="emailField.dirty && emailField.invalid"
+              required
+            />
+
+            @if (emailField.dirty && emailField.hasError("required")) {
+              <!-- <div class="form-text text-danger">Email is required.</div>-->
+              <div data-testid="error-email-required" class="moninvalid-tooltip">Email is required.</div>
+            } @else if (emailField.dirty && emailField.hasError("pattern")) {
+              <!-- <div class="form-text text-danger">Email is required.</div>-->
+              <div data-testid="error-email-pattern" class="moninvalid-tooltip">Email must be valid.</div>
+            }
+            @else if (isEmailAlreadyTaken()) {
+              <div data-testid="error-email-already-taken" class="moninvalid-tooltip">{{ emailAlreadyTakenError()?.message }}</div>
+            }
+          </div>
+
+          <div class="col-sm-4 mx-auto">
+            <label for="password" class="col-form-label fw-bold"
+              >Mot de passe</label
+            >
+          </div>
+          <div class="col-sm-4 position-relative mx-auto mb-4">
+            <!--position relative pour tooltip-->
+
+            <input
+              data-testid="password"
+              #passwordField="ngModel"
+              [(ngModel)]="password"
+              type="password"
+              name="password"
+              class="form-control"
+              id="password"
+              [class.is-invalid]="passwordField.dirty && passwordField.invalid"
+              required
+              minlength="8"
+              
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$"
+            />
+
+            @if (passwordField.dirty && passwordField.hasError("required")) {
+              <div data-testid="error-password-required" class="moninvalid-tooltip">Password is required.</div>
+            }
+            @if (passwordField.dirty && passwordField.hasError("minlength")) {
+              <div data-testid="error-password-minlength" class="moninvalid-tooltip">Password must contain at least 8 characters.</div>
+            }
+
+            @if (passwordField.dirty && passwordField.hasError("pattern")) {
+              <div data-testid="error-password-pattern" class="moninvalid-tooltip">Password must contain at least one uppercase letter, one lowercase letter, one digit and one special character.</div>
+            }
+
+          </div>
+
+          <div class="col-sm-4 mx-auto">
+            <label for="password" class="form-label col-form-label fw-bold"
+              >Confirmez votre mot de passe</label
+            >
+          </div>
+          <div class="col-sm-4 position-relative mx-auto mb-4">
+            <!--position relative pour tooltip-->
+
+            <input
+              data-testid="confirm-password"
+              #confirmPasswordField="ngModel"
+              [(ngModel)]="confirmPassword"
+              type="password"
+              name="confirmPassword"
+              class="form-control"
+              id="confirmPassword"
+              autocomplete="new-password"
+              [class.is-invalid]="
+                confirmPasswordField.dirty && confirmPasswordField.invalid
+              "
+              required
+            />
+
+            @if (
+              confirmPasswordField.dirty &&
+              confirmPasswordField.hasError("required")
+            ) {
+              <div data-testid="error-confirm-password-required" class="moninvalid-tooltip">Confirm password is required.</div>
+            }
+            @else if (
+              confirmPasswordField.dirty && isPasswordMatchValid()===false
+          ) {
+              <div data-testid="error-confirm-password-match" class="moninvalid-tooltip">Passwords do not match.</div>
+            }
+          </div>
+        
+
+          <div class="col-sm-3 mx-auto">
+            <div class="wrapper mt-5 offset-sm-2 mx-auto">
+              <button id="submit-button-id"
+              data-testid="submit-button"
+                type="submit"
+                class="btn btn-primary col-sm-3 w-100"
+                [disabled]="signupForm.invalid || !isPasswordMatchValid() || isEmailAlreadyTaken() || isLoading()"
+              >
+                S'inscrire
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+<h3>Toutes les donnees: {{ donnee() }}</h3>
+<h3>Est ce que les passwords matchs? {{ isPasswordMatchValid() }}</h3>
+
+<p>register works!</p>
