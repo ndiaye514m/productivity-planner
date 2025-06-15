@@ -84,6 +84,7 @@ export class AuthenticationFirebaseService implements AuthenticationService {
   login(email: string, password: string): Observable<LoginResponse> {
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseConfig.apiKey}`;
     // const url=`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAfX4A4wx1HUFwJ87VfTbTpM0CtPx9-cnA`;
+    //                                                                                      AIzaSyAfX4A4wx1HUFwJ87VfTbTpM0CtPx9-cnA
 
     const body = {
       email: email,
